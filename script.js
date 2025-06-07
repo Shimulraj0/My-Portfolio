@@ -1,5 +1,3 @@
-// script.js
-
 // Animate hero heading
 anime({
   targets: '#intro',
