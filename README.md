@@ -1,4 +1,4 @@
-# Shimul Raj Portfolio
+✨ Shimul Raj Das Portfolio ✨
 
 This is my personal portfolio website built with HTML, CSS, JavaScript, and anime.js animations.
 
@@ -22,4 +22,4 @@ This is my personal portfolio website built with HTML, CSS, JavaScript, and anim
 
 ---
 
-Made by Shimul Raj © 2025
+Made by Shimul Raj Das © 2025
