@@ -3,42 +3,165 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Shimul Raj's personal portfolio - Flutter, Android & AI Developer">
-  <meta name="keywords" content="Shimul Raj, Flutter, Android, AI, macOS, Portfolio">
+  <meta name="description" content="Shimul Raj Das's personal portfolio - Flutter, Android & AI Developer">
+  <meta name="keywords" content="Shimul Raj Das, Flutter, Android, AI, macOS, Portfolio">
   <meta name="author" content="Shimul Raj Das">
-  <title>Shimul Raj | Developer Portfolio</title>
+  <title>Shimul Raj Das | Developer Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
+  <style>
+    :root {
+      --primary-color: #4fc3f7;
+      --bg-color: #0f172a;
+      --text-color: #f8fafc;
+      --accent-color: #38bdf8;
+      --card-bg: #1e293b;
+    }
+    body.light-mode {
+      --bg-color: #ffffff;
+      --text-color: #0f172a;
+      --card-bg: #f1f5f9;
+    }
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: var(--card-bg);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .logo {
+      font-weight: 600;
+      font-size: 1.5rem;
+      color: var(--primary-color);
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-color);
+      transition: color 0.3s;
+    }
+    .nav-links a:hover {
+      color: var(--accent-color);
+    }
+    .theme-toggle {
+      cursor: pointer;
+      border: none;
+      background: none;
+      font-size: 1rem;
+      color: var(--text-color);
+    }
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 2rem;
+      gap: 2rem;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+    .hero-text {
+      max-width: 500px;
+    }
+    .hero-text h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 1rem;
+      background-color: var(--accent-color);
+      color: #fff;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+    .btn:hover {
+      background-color: #0ea5e9;
+    }
+    .section {
+      padding: 3rem 2rem;
+      text-align: center;
+      animation: fadeIn 1s ease-in-out;
+    }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .skill-card {
+      background: var(--card-bg);
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .project-card, .testimonial-card, .certificate-card {
+      background: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: 10px;
+      margin: 1rem auto;
+      max-width: 500px;
+      text-align: left;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .project-card h3, .testimonial-card h3, .certificate-card h3 {
+      margin: 0 0 0.5rem;
+    }
+    .project-card p, .testimonial-card p, .certificate-card p {
+      margin: 0.25rem 0 0.75rem;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: var(--card-bg);
+      color: #cbd5e1;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 </head>
 <body>
   <header>
     <nav class="navbar">
-      <h1 class="logo">Shimul Raj</h1>
+      <h1 class="logo">Shimul Raj Das</h1>
       <ul class="nav-links">
         <li><a href="#about">About</a></li>
         <li><a href="#skills">Skills</a></li>
         <li><a href="#projects">Projects</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
+      <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
     </nav>
   </header>
-
   <section class="hero">
     <div class="hero-text">
-      <h2 id="intro">Hi, I'm Shimul Raj</h2>
+      <h2 id="intro">Hi, I'm Shimul Raj Das</h2>
       <p>Flutter & Android Developer | AI Enthusiast | macOS Expert</p>
       <a href="assets/Shimul_Raj_Das_Resume.pdf" download class="btn">Download Resume</a>
     </div>
     <div class="hero-image">
-      <img src="asset/images/shi.jpg" alt="Shimul Raj"/>
+      <img src="asset/images/shi.jpg" alt="Shimul Raj" style="max-width:300px; border-radius: 15px;" />
     </div>
   </section>
-
   <section id="about" class="section">
     <h2>About Me</h2>
     <p>I’m a passionate developer with skills in mobile app development, macOS, and hardware tinkering. I’m currently pursuing a diploma in CSE and love building clean and scalable software.</p>
   </section>
-
   <section id="skills" class="section">
     <h2>Skills</h2>
     <div class="skills-grid">
@@ -49,28 +172,56 @@
       <div class="skill-card">Git & GitHub</div>
     </div>
   </section>
-
   <section id="projects" class="section">
     <h2>Projects</h2>
-    <ul>
-      <li>🔧 Voice-controlled Assistant (Flutter)</li>
-      <li>📱 Cross-platform AI-based Translator</li>
-      <li>💻 Hackintosh Build with Ventura</li>
-    </ul>
+    <div class="project-card">
+      <h3>🔧 Voice-controlled Assistant</h3>
+      <p>Built with Flutter and voice recognition APIs to perform tasks like reminders, calls, and search queries.</p>
+    </div>
+    <div class="project-card">
+      <h3>📱 AI-based Translator</h3>
+      <p>A mobile app using AI to translate text between languages in real time, with a smooth UI and offline support.</p>
+    </div>
+    <div class="project-card">
+      <h3>💻 Hackintosh Build</h3>
+      <p>Custom desktop running macOS Ventura on PC hardware. Experience in EFI setup, troubleshooting, and optimization.</p>
+    </div>
   </section>
-
+  <section id="testimonials" class="section">
+    <h2>Testimonials</h2>
+    <div class="testimonial-card">
+      <h3>🌟 Professor R. Islam</h3>
+      <p>“Shimul is an outstanding student with a strong work ethic. His ability to solve real-world problems with tech is inspiring.”</p>
+    </div>
+    <div class="testimonial-card">
+      <h3>👨‍💻 Client - Translator App</h3>
+      <p>“The app Shimul built exceeded our expectations. It was fast, accurate, and beautifully designed.”</p>
+    </div>
+  </section>
+  <section id="certificates" class="section">
+    <h2>Certifications</h2>
+    <div class="certificate-card">
+      <h3>📜 Google Android Developer Certificate</h3>
+      <p>Earned from Google Developers for completing advanced Android development training and assessment.</p>
+    </div>
+    <div class="certificate-card">
+      <h3>🧠 AI Fundamentals - Coursera</h3>
+      <p>Learned the basics of machine learning, neural networks, and large language models.</p>
+    </div>
+  </section>
   <section id="contact" class="section">
     <h2>Contact</h2>
     <p>Email: <a href="mailto:shimulrajdas001@gmail.com">shimulrajdas001@gmail.com</a></p>
     <p>LinkedIn: <a href="https://www.linkedin.com/in/shimul-raj-das-587847369" target="_blank">Visit Profile</a></p>
     <p>GitHub: <a href="https://github.com/Shimulraj0" target="_blank">@Shimulraj0</a></p>
   </section>
-
   <footer>
-    <p>&copy; 2025 Shimul Raj. All rights reserved.</p>
+    <p>&copy; 2025 Shimul Raj Das. All rights reserved.</p>
   </footer>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-  <script src="script.js"></script>
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle('light-mode');
+    }
+  </script>
 </body>
 </html>
