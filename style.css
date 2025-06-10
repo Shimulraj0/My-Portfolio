@@ -172,3 +172,11 @@ footer {
     gap: 1rem;
   }
   }
+.project-card {
+  transform-origin: center bottom;
+  will-change: transform, opacity;
+}
+/* Optional: smoother entrance for sections */
+section h2, section p, .project-card {
+  opacity: 0;
+}
