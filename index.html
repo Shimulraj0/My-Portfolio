@@ -1,235 +1,305 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  
-- <script src="js/main.js"></script>
-+ <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
-+ <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/ScrollTrigger.min.js"></script>
-+ <script src="js/main.js"></script>
-</body>
-</html>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Shimul Raj Das — Flutter, Android & AI Developer. Interactive portfolio merged from README + site." />
+  <title>Shimul Raj Das — Portfolio</title>
+  <link rel="icon" href="data:;base64,iVBORw0KGgo="> <!-- replace with your favicon -->
 
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Shimul Raj Das's personal portfolio - Flutter, Android & AI Developer">
-  <meta name="keywords" content="Shimul Raj Das, Flutter, Android, AI, macOS, Portfolio">
-  <meta name="author" content="Shimul Raj Das">
-  <title>Shimul Raj Das | Developer Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
+  <!-- Fonts & libs -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/ScrollTrigger.min.js"></script>
+
   <style>
-    :root {
-      --primary-color: #4fc3f7;
-      --bg-color: #0f172a;
-      --text-color: #f8fafc;
-      --accent-color: #38bdf8;
-      --card-bg: #1e293b;
+    :root{
+      --bg:#071025;
+      --panel: rgba(255,255,255,0.03);
+      --muted:#a8c0e8;
+      --accent: #7F7FD5;
+      --accent2:#91EAE4;
+      --glass: rgba(255,255,255,0.04);
+      --text:#e6f0ff;
     }
-    body.light-mode {
-      --bg-color: #ffffff;
-      --text-color: #0f172a;
-      --card-bg: #f1f5f9;
+
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:'Poppins',system-ui,Segoe UI,Roboto,Helvetica,Arial;
+      background: linear-gradient(180deg,var(--bg), #0b1220);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-x:hidden;
+      transition: background 400ms ease, color 400ms ease;
     }
-    body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      transition: background-color 0.3s, color 0.3s;
-    }
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-      background-color: var(--card-bg);
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-    .logo {
-      font-weight: 600;
-      font-size: 1.5rem;
-      color: var(--primary-color);
-    }
-    .nav-links {
-      list-style: none;
-      display: flex;
-      gap: 1.5rem;
-    }
-    .nav-links a {
-      text-decoration: none;
-      color: var(--text-color);
-      transition: color 0.3s;
-    }
-    .nav-links a:hover {
-      color: var(--accent-color);
-    }
-    .theme-toggle {
-      cursor: pointer;
-      border: none;
-      background: none;
-      font-size: 1rem;
-      color: var(--text-color);
-    }
-    .hero {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: center;
-      padding: 4rem 2rem;
-      gap: 2rem;
-      animation: fadeIn 1.5s ease-in-out;
-    }
-    .hero-text {
-      max-width: 500px;
-    }
-    .hero-text h2 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-    }
-    .btn {
-      display: inline-block;
-      margin-top: 1rem;
-      background-color: var(--accent-color);
-      color: #fff;
-      padding: 0.75rem 1.5rem;
-      border-radius: 8px;
-      text-decoration: none;
-      transition: background-color 0.3s;
-    }
-    .btn:hover {
-      background-color: #0ea5e9;
-    }
-    .section {
-      padding: 3rem 2rem;
-      text-align: center;
-      animation: fadeIn 1s ease-in-out;
-    }
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-    .skill-card {
-      background: var(--card-bg);
-      padding: 1rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    .project-card, .testimonial-card, .certificate-card {
-      background: var(--card-bg);
-      padding: 1.5rem;
-      border-radius: 10px;
-      margin: 1rem auto;
-      max-width: 500px;
-      text-align: left;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-    .project-card h3, .testimonial-card h3, .certificate-card h3 {
-      margin: 0 0 0.5rem;
-    }
-    .project-card p, .testimonial-card p, .certificate-card p {
-      margin: 0.25rem 0 0.75rem;
-    }
-    footer {
-      text-align: center;
-      padding: 1rem;
-      background-color: var(--card-bg);
-      color: #cbd5e1;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+
+    /* layout */
+    #bgCanvas{position:fixed; inset:0; z-index:0}
+    .wrap{position:relative; z-index:5; max-width:1100px; margin:0 auto; padding:36px 20px 120px;}
+
+    .nav{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 18px; border-radius:12px; background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); backdrop-filter: blur(8px) saturate(120%); border:1px solid rgba(255,255,255,0.04); box-shadow: 0 6px 20px rgba(3,8,20,0.6); margin-bottom:20px}
+    .brand{display:flex; gap:12px; align-items:center}
+    .logo-dot{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent2)); display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff}
+    .nav-links{display:flex; gap:14px; list-style:none; margin:0; padding:0}
+    .nav-links a{color:var(--muted); text-decoration:none; font-weight:600; font-size:14px}
+    .nav-links a:hover{color:#fff; text-decoration:underline}
+
+    .hero{display:flex; gap:28px; align-items:center; padding:26px; border-radius:14px; background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent); border:1px solid rgba(255,255,255,0.03)}
+    .hero-left{flex:1; min-width:260px}
+    .hero-right{width:340px; display:flex; justify-content:center; align-items:center}
+    .hero h2{font-size:32px; margin:0 0 8px}
+    .badge-line{display:flex; gap:8px; margin-top:10px; flex-wrap:wrap}
+    .btn{display:inline-block;padding:10px 14px;border-radius:10px;background:linear-gradient(90deg,var(--accent),var(--accent2));color:#021224;font-weight:700;text-decoration:none}
+    .small-muted{color:var(--muted); font-size:14px; margin-top:8px}
+
+    section.card{margin-top:22px; padding:18px; border-radius:12px; background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.03)}
+    .grid{display:grid; gap:12px}
+    .two-col{display:grid; grid-template-columns: repeat(2,1fr); gap:12px}
+    @media (max-width:880px){ .two-col{grid-template-columns:1fr} .hero{flex-direction:column-reverse} .hero-right{width:220px} }
+
+    .badges{display:flex; gap:8px; flex-wrap:wrap}
+    .gh-stats{display:flex; gap:12px; align-items:center; justify-content:center; flex-wrap:wrap; margin-top:12px}
+    .snake{display:flex; justify-content:center; margin-top:12px}
+
+    footer{margin-top:26px; text-align:center; color:var(--muted); font-size:14px}
+
+    a.inline{color:#fff; text-decoration:underline}
+
+    /* back to top */
+    #toTop{position:fixed; right:18px; bottom:18px; z-index:60; background:linear-gradient(90deg,var(--accent),var(--accent2)); border:none; color:#021224; padding:12px 14px; border-radius:12px; box-shadow:0 8px 30px rgba(0,0,0,0.5); display:none}
+
+    /* floating social */
+    .social-fixed{position:fixed; left:12px; top:50%; transform:translateY(-50%); z-index:60; display:flex; flex-direction:column; gap:8px}
+    .social-fixed a{display:block;padding:8px;border-radius:8px;background:rgba(255,255,255,0.03); text-decoration:none; color:var(--muted); font-weight:700}
+
+    /* light theme tweaks */
+    body.light{ --bg: #f6f9ff; --panel: rgba(2,18,36,0.03); --muted: #334; --accent:#4f6ef2; --accent2:#7fd3e8; --text: #021224 }
+    body.light a.inline{color:#021224}
+
+    /* small responsive images */
+    .capsule{border-radius:12px; box-shadow:0 10px 40px rgba(23,30,53,0.7)}
+
+    /* subtle transitions */
+    .wrap, .nav, section.card, #hero{transition: all 350ms ease}
   </style>
 </head>
 <body>
-  <header>
-    <nav class="navbar">
-      <h1 class="logo">Shimul Raj Das</h1>
-      <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-      <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
-    </nav>
-  </header>
-  <section class="hero">
-    <div class="hero-text">
-      <h2 id="intro">Hi, I'm Shimul Raj Das</h2>
-      <p>Flutter & Android Developer | AI Enthusiast | macOS Expert</p>
-      <a href="assets/Shimul_Raj_Das_Resume.pdf" download class="btn">Download Resume</a>
+  <canvas id="bgCanvas"></canvas>
+
+  <div class="social-fixed">
+    <a href="https://github.com/Shimulraj0" target="_blank">GitHub</a>
+    <a href="https://www.linkedin.com/in/shimul-raj-das-587847369" target="_blank">LinkedIn</a>
+    <a href="mailto:shimulrajdas001@gmail.com">Email</a>
+  </div>
+
+  <div class="wrap">
+    <div class="nav" id="topNav">
+      <div class="brand">
+        <div class="logo-dot">SR</div>
+        <div>
+          <h1>Shimul Raj Das</h1>
+          <div style="font-size:12px;color:var(--muted)">Flutter • Android • AI</div>
+        </div>
+      </div>
+
+      <div style="display:flex; gap:12px; align-items:center;">
+        <ul class="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+
+        <div class="controls">
+          <button class="btn" id="downloadResume" title="Download Resume">📄 Resume</button>
+          <button id="themeToggle" class="btn" style="background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)">🌓</button>
+        </div>
+      </div>
     </div>
-    <div class="hero-image">
-      <img src="asset/images/shi.jpg" alt="Shimul Raj" style="max-width:300px; border-radius: 15px;" />
+
+    <div class="hero" id="hero">
+      <div class="hero-left">
+        <h2>Hi 👋, I'm <span style="color:var(--accent)">Shimul Raj Das</span></h2>
+        <div class="small-muted">Flutter Developer · Android Tweaker · macOS Installer · AI & LLM Explorer</div>
+
+        <div class="badge-line">
+          <img src="https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white" alt="Dart" />
+          <img src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white" alt="Flutter" />
+          <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
+        </div>
+
+        <div style="margin-top:14px">
+          <a class="btn" href="assets/Shimul_Raj_Das_Resume.pdf" download>Download Resume</a>
+          <a class="btn" href="#projects" style="background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted);margin-left:8px">Projects →</a>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div style="text-align:center">
+          <img class="capsule" src="https://capsule-render.vercel.app/api?type=waving&color=0:7F7FD5,50:86A8E7,100:91EAE4&height=200&section=header&text=Shimul%20Raj%20Das&fontSize=32&fontColor=ffffff&desc=Flutter%20Dev%20|%20Android%20Tweaker&descSize=14&descAlignY=70" alt="capsule" />
+          <div style="margin-top:8px">
+            <img src="https://user-images.githubusercontent.com/67656229/231989130-452bdc96-4fb3-4129-91d6-1c2fb1e8ce90.gif" alt="demo gif" style="width:180px; border-radius:10px; margin-top:8px; box-shadow:0 10px 40px rgba(0,0,0,0.6)"/>
+          </div>
+        </div>
+      </div>
     </div>
-  </section>
-  <section id="about" class="section">
-    <h2>About Me</h2>
-    <p>I’m a passionate developer with skills in mobile app development, macOS, and hardware tinkering. I’m currently pursuing a diploma in CSE and love building clean and scalable software.</p>
-  </section>
-  <section id="skills" class="section">
-    <h2>Skills</h2>
-    <div class="skills-grid">
-      <div class="skill-card">Flutter</div>
-      <div class="skill-card">Android</div>
-      <div class="skill-card">AI & LLMs</div>
-      <div class="skill-card">macOS & Hackintosh</div>
-      <div class="skill-card">Git & GitHub</div>
-    </div>
-  </section>
-  <section id="projects" class="section">
-    <h2>Projects</h2>
-    <div class="project-card">
-      <h3>🔧 Voice-controlled Assistant</h3>
-      <p>Built with Flutter and voice recognition APIs to perform tasks like reminders, calls, and search queries.</p>
-    </div>
-    <div class="project-card">
-      <h3>📱 AI-based Translator</h3>
-      <p>A mobile app using AI to translate text between languages in real time, with a smooth UI and offline support.</p>
-    </div>
-    <div class="project-card">
-      <h3>💻 Hackintosh Build</h3>
-      <p>Custom desktop running macOS Ventura on PC hardware. Experience in EFI setup, troubleshooting, and optimization.</p>
-    </div>
-  </section>
-  <section id="testimonials" class="section">
-    <h2>Testimonials</h2>
-    <div class="testimonial-card">
-      <h3>🌟 Professor R. Islam</h3>
-      <p>“Shimul is an outstanding student with a strong work ethic. His ability to solve real-world problems with tech is inspiring.”</p>
-    </div>
-    <div class="testimonial-card">
-      <h3>👨‍💻 Client - Translator App</h3>
-      <p>“The app Shimul built exceeded our expectations. It was fast, accurate, and beautifully designed.”</p>
-    </div>
-  </section>
-  <section id="certificates" class="section">
-    <h2>Certifications</h2>
-    <div class="certificate-card">
-      <h3>📜 Google Android Developer Certificate</h3>
-      <p>Earned from Google Developers for completing advanced Android development training and assessment.</p>
-    </div>
-    <div class="certificate-card">
-      <h3>🧠 AI Fundamentals - Coursera</h3>
-      <p>Learned the basics of machine learning, neural networks, and large language models.</p>
-    </div>
-  </section>
-  <section id="contact" class="section">
-    <h2>Contact</h2>
-    <p>Email: <a href="mailto:shimulrajdas001@gmail.com">shimulrajdas001@gmail.com</a></p>
-    <p>LinkedIn: <a href="https://www.linkedin.com/in/shimul-raj-das-587847369" target="_blank">Visit Profile</a></p>
-    <p>GitHub: <a href="https://github.com/Shimulraj0" target="_blank">@Shimulraj0</a></p>
-  </section>
-  <footer>
-    <p>&copy; 2025 Shimul Raj Das. All rights reserved.</p>
-  </footer>
+
+    <section id="about" class="card">
+      <h3>🧑‍🎓 Education</h3>
+      <div class="two-col">
+        <div>
+          <ul>
+            <li>🎓 <strong>Diploma in Computer Science Engineering</strong></li>
+            <li>🏫 Shariatpur Polytechnic Institute</li>
+            <li>📅 Expected Graduation: January 2026</li>
+            <li>📈 Last Semester CGPA: <strong>3.68</strong></li>
+          </ul>
+        </div>
+        <div>
+          <h4>About Me</h4>
+          <p>I’m building voice-controlled AI apps in Flutter, exploring LLMs for Bengali↔English translation, and I enjoy Android custom ROMs, recoveries, and Hackintosh builds. Deep interest in IT support & system troubleshooting.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="card">
+      <h3>💼 Tech Stack</h3>
+      <div class="badges">
+        <img src="https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white"/>
+        <img src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white"/>
+        <img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white"/>
+        <img src="https://img.shields.io/badge/Bash-4EAA25?style=for-the-badge&logo=gnu-bash&logoColor=white"/>
+        <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white"/>
+        <img src="https://img.shields.io/badge/macOS-black?style=for-the-badge&logo=apple&logoColor=white"/>
+        <img src="https://img.shields.io/badge/GPT%20API-000000?style=for-the-badge&logo=openai&logoColor=white"/>
+      </div>
+
+      <div style="margin-top:12px" class="grid">
+        <div class="skill-card" style="background:var(--panel); padding:12px; border-radius:10px">Flutter & Dart — Cross-platform mobile apps</div>
+        <div class="skill-card" style="background:var(--panel); padding:12px; border-radius:10px">Android Modding & ROMs — flashing, recovery</div>
+        <div class="skill-card" style="background:var(--panel); padding:12px; border-radius:10px">LLMs & AI integration — translation & voice</div>
+        <div class="skill-card" style="background:var(--panel); padding:12px; border-radius:10px">macOS / Hackintosh — EFI & optimization</div>
+      </div>
+    </section>
+
+    <section id="projects" class="card">
+      <h3>🚀 Projects</h3>
+      <div class="grid">
+        <div class="project-card" style="background:var(--panel); padding:12px; border-radius:10px">
+          <h4>🔧 Voice-controlled Assistant</h4>
+          <p>Flutter + voice recognition, performing calls, reminders, and device actions offline-first.</p>
+        </div>
+        <div class="project-card" style="background:var(--panel); padding:12px; border-radius:10px">
+          <h4>📱 AI-based Translator</h4>
+          <p>Real-time Bengali ↔ English translation using LLM APIs with offline caching and smooth UI.</p>
+        </div>
+        <div class="project-card" style="background:var(--panel); padding:12px; border-radius:10px">
+          <h4>💻 Hackintosh Build</h4>
+          <p>Custom macOS installation on PC — EFI setup, kexts, and performance tuning.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="github" class="card">
+      <h3>📊 GitHub Stats</h3>
+      <div class="gh-stats">
+        <img src="https://github-readme-stats.vercel.app/api?username=Shimulraj0&show_icons=true&theme=radical" alt="stats" style="max-width:360px;border-radius:8px"/>
+        <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Shimulraj0&layout=compact&theme=radical" alt="top langs" style="max-width:260px;border-radius:8px"/>
+      </div>
+
+      <div class="snake">
+        <img src="https://raw.githubusercontent.com/Shimulraj0/Shimulraj0/main/github-contribution-grid-snake-dark.svg?palette=github-dark" alt="contrib-snake" style="max-width:760px; border-radius:8px"/>
+      </div>
+
+      <div style="margin-top:10px; display:flex; gap:8px; justify-content:center; flex-wrap:wrap;">
+        <img src="https://github-profile-trophy.vercel.app/?username=Shimulraj0&theme=algolia&margin-w=10&column=7" alt="trophies" style="max-width:760px; border-radius:8px"/>
+      </div>
+    </section>
+
+    <section id="contact" class="card">
+      <h3>🔗 Let's Connect</h3>
+      <p>Email: <a class="inline" href="mailto:shimulrajdas001@gmail.com">shimulrajdas001@gmail.com</a></p>
+      <p>LinkedIn: <a class="inline" href="https://www.linkedin.com/in/shimul-raj-das-587847369" target="_blank">linkedin.com/in/shimul-raj-das-587847369</a></p>
+      <p>GitHub: <a class="inline" href="https://github.com/Shimulraj0" target="_blank">@Shimulraj0</a></p>
+
+      <div style="margin-top:12px; text-align:center">
+        <a href="https://komarev.com/ghpvc/?username=Shimulraj0&label=Profile%20Views&color=0e75b6&style=flat-square"><img alt="visitors" src="https://komarev.com/ghpvc/?username=Shimulraj0&label=Profile%20Views&color=0e75b6&style=flat-square"></a>
+      </div>
+    </section>
+
+    <footer>
+      <div>Made with ❤️ by <strong>Shimul Raj Das</strong> • © 2025</div>
+    </footer>
+  </div>
+
+  <button id="toTop" aria-label="Back to top">⬆︎</button>
+
   <script>
-    function toggleTheme() {
-      document.body.classList.toggle('light-mode');
+    // Canvas background particles (lightweight)
+    const canvas = document.getElementById('bgCanvas');
+    const ctx = canvas.getContext('2d');
+    let W = canvas.width = innerWidth;
+    let H = canvas.height = innerHeight;
+    addEventListener('resize', ()=>{ W = canvas.width = innerWidth; H = canvas.height = innerHeight; });
+
+    const parts = [];
+    function addPart(x,y,burst=false){
+      const n = burst? 30 : 6;
+      for(let i=0;i<n;i++){
+        parts.push({ x, y, vx: (Math.random()-0.5)*(burst?8:2), vy: (Math.random()-0.5)*(burst?8:2), r: Math.random()*3 + (burst?1.5:0.6), life: Math.random()*60 + 40, hue: 200 + Math.random()*160 });
+      }
+      if(parts.length>2400) parts.splice(0, parts.length-1600);
     }
+    addEventListener('mousemove', e => addPart(e.clientX, e.clientY));
+    addEventListener('click', e => addPart(e.clientX, e.clientY, true));
+
+    function frame(){
+      ctx.fillStyle = 'rgba(7,12,22,0.12)';
+      ctx.fillRect(0,0,W,H);
+      for(let i=parts.length-1;i>=0;i--){
+        const p=parts[i]; p.x+=p.vx; p.y+=p.vy; p.vx*=0.98; p.vy*=0.98; p.life--; p.r*=0.994;
+        if(p.life<=0||p.r<0.2){ parts.splice(i,1); continue; }
+        ctx.save(); ctx.globalCompositeOperation='lighter'; ctx.fillStyle=`hsla(${p.hue},90%,60%,${Math.max(0,p.life/120)})`; ctx.beginPath(); ctx.arc(p.x,p.y,p.r*2.8,0,Math.PI*2); ctx.fill(); ctx.restore();
+        ctx.beginPath(); ctx.fillStyle=`hsla(${p.hue},90%,60%,${Math.max(0,p.life/120)})`; ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill();
+      }
+      requestAnimationFrame(frame);
+    }
+    for(let i=0;i<160;i++) addPart(Math.random()*W, Math.random()*H);
+    frame();
+
+    // GSAP animations
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.from("#hero .hero-left", {opacity:0, y:40, duration:1.2, ease:"power3.out"});
+    gsap.from("#hero .hero-right", {opacity:0, x:60, duration:1.2, delay:0.18, ease:"power3.out"});
+    gsap.utils.toArray('section.card').forEach((el,i)=>{
+      gsap.fromTo(el,{opacity:0,y:40},{opacity:1,y:0,duration:1,delay:0.08*i,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 85%',toggleActions:'play none none reverse'}})
+    });
+
+    // Theme toggle + resume button + to-top
+    const themeBtn = document.getElementById('themeToggle');
+    themeBtn.addEventListener('click', () => {
+      document.body.classList.toggle('light');
+      if (document.body.classList.contains('light')) themeBtn.textContent='🌙'; else themeBtn.textContent='🌓';
+    });
+
+    document.getElementById('downloadResume').addEventListener('click', ()=>{
+      window.open('assets/Shimul_Raj_Das_Resume.pdf','_blank');
+    });
+
+    const toTop = document.getElementById('toTop');
+    window.addEventListener('scroll', ()=>{ if(window.scrollY>400) toTop.style.display='block'; else toTop.style.display='none'; });
+    toTop.addEventListener('click', ()=> gsap.to(window, {scrollTo:0, duration:0.8, ease:'power2.inOut'}));
+
+    // Smooth scroll for nav links
+    document.querySelectorAll('.nav-links a').forEach(a=>{
+      a.addEventListener('click', e=>{ e.preventDefault(); const id = a.getAttribute('href'); document.querySelector(id).scrollIntoView({behavior:'smooth',block:'start'}); });
+    });
+
+    // small accessibility: keyboard focus visible
+    document.addEventListener('keyup', (e)=>{ if(e.key==='Tab') document.body.classList.add('show-focus'); });
+
   </script>
 </body>
 </html>
