@@ -1,305 +1,171 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Shimul Raj Das — Flutter, Android & AI Developer. Interactive portfolio merged from README + site." />
-  <title>Shimul Raj Das — Portfolio</title>
-  <link rel="icon" href="data:;base64,iVBORw0KGgo="> <!-- replace with your favicon -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Raj Portfolio</title>
 
-  <!-- Fonts & libs -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/ScrollTrigger.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: "Poppins", sans-serif;
+            background: #f5f7fa;
+        }
 
-  <style>
-    :root{
-      --bg:#071025;
-      --panel: rgba(255,255,255,0.03);
-      --muted:#a8c0e8;
-      --accent: #7F7FD5;
-      --accent2:#91EAE4;
-      --glass: rgba(255,255,255,0.04);
-      --text:#e6f0ff;
-    }
+        header {
+            background: #0d1321;
+            padding: 20px 40px;
+            color: white;
+        }
 
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family:'Poppins',system-ui,Segoe UI,Roboto,Helvetica,Arial;
-      background: linear-gradient(180deg,var(--bg), #0b1220);
-      color:var(--text);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      overflow-x:hidden;
-      transition: background 400ms ease, color 400ms ease;
-    }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-    /* layout */
-    #bgCanvas{position:fixed; inset:0; z-index:0}
-    .wrap{position:relative; z-index:5; max-width:1100px; margin:0 auto; padding:36px 20px 120px;}
+        nav a {
+            color: white;
+            margin-left: 20px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: .2s;
+        }
 
-    .nav{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 18px; border-radius:12px; background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); backdrop-filter: blur(8px) saturate(120%); border:1px solid rgba(255,255,255,0.04); box-shadow: 0 6px 20px rgba(3,8,20,0.6); margin-bottom:20px}
-    .brand{display:flex; gap:12px; align-items:center}
-    .logo-dot{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent2)); display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff}
-    .nav-links{display:flex; gap:14px; list-style:none; margin:0; padding:0}
-    .nav-links a{color:var(--muted); text-decoration:none; font-weight:600; font-size:14px}
-    .nav-links a:hover{color:#fff; text-decoration:underline}
+        nav a:hover {
+            opacity: .7;
+        }
 
-    .hero{display:flex; gap:28px; align-items:center; padding:26px; border-radius:14px; background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent); border:1px solid rgba(255,255,255,0.03)}
-    .hero-left{flex:1; min-width:260px}
-    .hero-right{width:340px; display:flex; justify-content:center; align-items:center}
-    .hero h2{font-size:32px; margin:0 0 8px}
-    .badge-line{display:flex; gap:8px; margin-top:10px; flex-wrap:wrap}
-    .btn{display:inline-block;padding:10px 14px;border-radius:10px;background:linear-gradient(90deg,var(--accent),var(--accent2));color:#021224;font-weight:700;text-decoration:none}
-    .small-muted{color:var(--muted); font-size:14px; margin-top:8px}
+        .hero {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 20px;
+            background: white;
+        }
 
-    section.card{margin-top:22px; padding:18px; border-radius:12px; background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.03)}
-    .grid{display:grid; gap:12px}
-    .two-col{display:grid; grid-template-columns: repeat(2,1fr); gap:12px}
-    @media (max-width:880px){ .two-col{grid-template-columns:1fr} .hero{flex-direction:column-reverse} .hero-right{width:220px} }
+        .hero-content {
+            max-width: 700px;
+        }
 
-    .badges{display:flex; gap:8px; flex-wrap:wrap}
-    .gh-stats{display:flex; gap:12px; align-items:center; justify-content:center; flex-wrap:wrap; margin-top:12px}
-    .snake{display:flex; justify-content:center; margin-top:12px}
+        .hero h1 {
+            font-size: 40px;
+            font-weight: 700;
+        }
 
-    footer{margin-top:26px; text-align:center; color:var(--muted); font-size:14px}
+        .hero p {
+            font-size: 18px;
+        }
 
-    a.inline{color:#fff; text-decoration:underline}
+        /* PROJECTS SECTION */
+        .section-title {
+            text-align: center;
+            margin-top: 60px;
+            font-size: 32px;
+            font-weight: 700;
+        }
 
-    /* back to top */
-    #toTop{position:fixed; right:18px; bottom:18px; z-index:60; background:linear-gradient(90deg,var(--accent),var(--accent2)); border:none; color:#021224; padding:12px 14px; border-radius:12px; box-shadow:0 8px 30px rgba(0,0,0,0.5); display:none}
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            padding: 40px;
+        }
 
-    /* floating social */
-    .social-fixed{position:fixed; left:12px; top:50%; transform:translateY(-50%); z-index:60; display:flex; flex-direction:column; gap:8px}
-    .social-fixed a{display:block;padding:8px;border-radius:8px;background:rgba(255,255,255,0.03); text-decoration:none; color:var(--muted); font-weight:700}
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 14px;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+            transition: .25s;
+        }
 
-    /* light theme tweaks */
-    body.light{ --bg: #f6f9ff; --panel: rgba(2,18,36,0.03); --muted: #334; --accent:#4f6ef2; --accent2:#7fd3e8; --text: #021224 }
-    body.light a.inline{color:#021224}
+        /* SIMPLE HOVER EFFECT */
+        .card:hover {
+            transform: scale(1.04);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
 
-    /* small responsive images */
-    .capsule{border-radius:12px; box-shadow:0 10px 40px rgba(23,30,53,0.7)}
+        .card h3 {
+            margin: 10px 0 5px;
+        }
 
-    /* subtle transitions */
-    .wrap, .nav, section.card, #hero{transition: all 350ms ease}
-  </style>
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            background: #0d1321;
+            color: white;
+        }
+
+        .social-links a {
+            margin: 0 10px;
+            color: white;
+            text-decoration: none;
+        }
+
+    </style>
 </head>
+
 <body>
-  <canvas id="bgCanvas"></canvas>
 
-  <div class="social-fixed">
-    <a href="https://github.com/Shimulraj0" target="_blank">GitHub</a>
-    <a href="https://www.linkedin.com/in/shimul-raj-das-587847369" target="_blank">LinkedIn</a>
-    <a href="mailto:shimulrajdas001@gmail.com">Email</a>
-  </div>
+    <header>
+        <nav>
+            <h2>RAJ</h2>
+            <div>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+                <a href="https://github.com/Shimulraj0">GitHub</a>
+                <a href="https://www.linkedin.com/in/shimul-raj-das-587847369">LinkedIn</a>
+            </div>
+        </nav>
+    </header>
 
-  <div class="wrap">
-    <div class="nav" id="topNav">
-      <div class="brand">
-        <div class="logo-dot">SR</div>
-        <div>
-          <h1>Shimul Raj Das</h1>
-          <div style="font-size:12px;color:var(--muted)">Flutter • Android • AI</div>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Hi, I'm Raj 👋</h1>
+            <p>
+                A passionate Flutter App Developer, Android Specialist, IT Hardware Expert,  
+                and tech enthusiast from Dhaka, Bangladesh.
+                I love creating modern apps, voice-based systems, and experimenting with OSINT & Hackintosh.
+            </p>
         </div>
-      </div>
-
-      <div style="display:flex; gap:12px; align-items:center;">
-        <ul class="nav-links">
-          <li><a href="#about">About</a></li>
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-
-        <div class="controls">
-          <button class="btn" id="downloadResume" title="Download Resume">📄 Resume</button>
-          <button id="themeToggle" class="btn" style="background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)">🌓</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="hero" id="hero">
-      <div class="hero-left">
-        <h2>Hi 👋, I'm <span style="color:var(--accent)">Shimul Raj Das</span></h2>
-        <div class="small-muted">Flutter Developer · Android Tweaker · macOS Installer · AI & LLM Explorer</div>
-
-        <div class="badge-line">
-          <img src="https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white" alt="Dart" />
-          <img src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white" alt="Flutter" />
-          <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
-        </div>
-
-        <div style="margin-top:14px">
-          <a class="btn" href="assets/Shimul_Raj_Das_Resume.pdf" download>Download Resume</a>
-          <a class="btn" href="#projects" style="background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted);margin-left:8px">Projects →</a>
-        </div>
-      </div>
-
-      <div class="hero-right">
-        <div style="text-align:center">
-          <img class="capsule" src="https://capsule-render.vercel.app/api?type=waving&color=0:7F7FD5,50:86A8E7,100:91EAE4&height=200&section=header&text=Shimul%20Raj%20Das&fontSize=32&fontColor=ffffff&desc=Flutter%20Dev%20|%20Android%20Tweaker&descSize=14&descAlignY=70" alt="capsule" />
-          <div style="margin-top:8px">
-            <img src="https://user-images.githubusercontent.com/67656229/231989130-452bdc96-4fb3-4129-91d6-1c2fb1e8ce90.gif" alt="demo gif" style="width:180px; border-radius:10px; margin-top:8px; box-shadow:0 10px 40px rgba(0,0,0,0.6)"/>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <section id="about" class="card">
-      <h3>🧑‍🎓 Education</h3>
-      <div class="two-col">
-        <div>
-          <ul>
-            <li>🎓 <strong>Diploma in Computer Science Engineering</strong></li>
-            <li>🏫 Shariatpur Polytechnic Institute</li>
-            <li>📅 Expected Graduation: January 2026</li>
-            <li>📈 Last Semester CGPA: <strong>3.68</strong></li>
-          </ul>
-        </div>
-        <div>
-          <h4>About Me</h4>
-          <p>I’m building voice-controlled AI apps in Flutter, exploring LLMs for Bengali↔English translation, and I enjoy Android custom ROMs, recoveries, and Hackintosh builds. Deep interest in IT support & system troubleshooting.</p>
-        </div>
-      </div>
     </section>
 
-    <section id="skills" class="card">
-      <h3>💼 Tech Stack</h3>
-      <div class="badges">
-        <img src="https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white"/>
-        <img src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white"/>
-        <img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white"/>
-        <img src="https://img.shields.io/badge/Bash-4EAA25?style=for-the-badge&logo=gnu-bash&logoColor=white"/>
-        <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white"/>
-        <img src="https://img.shields.io/badge/macOS-black?style=for-the-badge&logo=apple&logoColor=white"/>
-        <img src="https://img.shields.io/badge/GPT%20API-000000?style=for-the-badge&logo=openai&logoColor=white"/>
-      </div>
+    <h2 class="section-title" id="projects">Featured Projects</h2>
 
-      <div style="margin-top:12px" class="grid">
-        <div class="skill-card" style="background:var(--panel); padding:12px; border-radius:10px">Flutter & Dart — Cross-platform mobile apps</div>
-        <div class="skill-card" style="background:var(--panel); padding:12px; border-radius:10px">Android Modding & ROMs — flashing, recovery</div>
-        <div class="skill-card" style="background:var(--panel); padding:12px; border-radius:10px">LLMs & AI integration — translation & voice</div>
-        <div class="skill-card" style="background:var(--panel); padding:12px; border-radius:10px">macOS / Hackintosh — EFI & optimization</div>
-      </div>
-    </section>
-
-    <section id="projects" class="card">
-      <h3>🚀 Projects</h3>
-      <div class="grid">
-        <div class="project-card" style="background:var(--panel); padding:12px; border-radius:10px">
-          <h4>🔧 Voice-controlled Assistant</h4>
-          <p>Flutter + voice recognition, performing calls, reminders, and device actions offline-first.</p>
+    <section class="projects">
+        <div class="card">
+            <h3>Flutter Voice Assistant</h3>
+            <p>Standalone app that performs system tasks via voice commands.</p>
         </div>
-        <div class="project-card" style="background:var(--panel); padding:12px; border-radius:10px">
-          <h4>📱 AI-based Translator</h4>
-          <p>Real-time Bengali ↔ English translation using LLM APIs with offline caching and smooth UI.</p>
+
+        <div class="card">
+            <h3>Inventory System (Flutter)</h3>
+            <p>Pharmacy stock, barcode scan, and optimized UI.</p>
         </div>
-        <div class="project-card" style="background:var(--panel); padding:12px; border-radius:10px">
-          <h4>💻 Hackintosh Build</h4>
-          <p>Custom macOS installation on PC — EFI setup, kexts, and performance tuning.</p>
+
+        <div class="card">
+            <h3>Hackintosh Install</h3>
+            <p>macOS Ventura installation on PC using OpenCore.</p>
         </div>
-      </div>
+
+        <div class="card">
+            <h3>Termux OSINT Toolkit</h3>
+            <p>Blue-themed GUI + private GitHub repo integration.</p>
+        </div>
     </section>
 
-    <section id="github" class="card">
-      <h3>📊 GitHub Stats</h3>
-      <div class="gh-stats">
-        <img src="https://github-readme-stats.vercel.app/api?username=Shimulraj0&show_icons=true&theme=radical" alt="stats" style="max-width:360px;border-radius:8px"/>
-        <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Shimulraj0&layout=compact&theme=radical" alt="top langs" style="max-width:260px;border-radius:8px"/>
-      </div>
+    <footer id="contact">
+        <p>📞 +8801575204054 | ✉️ shimulrajdas001@gmail.com</p>
 
-      <div class="snake">
-        <img src="https://raw.githubusercontent.com/Shimulraj0/Shimulraj0/main/github-contribution-grid-snake-dark.svg?palette=github-dark" alt="contrib-snake" style="max-width:760px; border-radius:8px"/>
-      </div>
+        <div class="social-links">
+            <a href="https://github.com/Shimulraj0">GitHub</a>
+            <a href="https://www.linkedin.com/in/shimul-raj-das-587847369">LinkedIn</a>
+        </div>
 
-      <div style="margin-top:10px; display:flex; gap:8px; justify-content:center; flex-wrap:wrap;">
-        <img src="https://github-profile-trophy.vercel.app/?username=Shimulraj0&theme=algolia&margin-w=10&column=7" alt="trophies" style="max-width:760px; border-radius:8px"/>
-      </div>
-    </section>
-
-    <section id="contact" class="card">
-      <h3>🔗 Let's Connect</h3>
-      <p>Email: <a class="inline" href="mailto:shimulrajdas001@gmail.com">shimulrajdas001@gmail.com</a></p>
-      <p>LinkedIn: <a class="inline" href="https://www.linkedin.com/in/shimul-raj-das-587847369" target="_blank">linkedin.com/in/shimul-raj-das-587847369</a></p>
-      <p>GitHub: <a class="inline" href="https://github.com/Shimulraj0" target="_blank">@Shimulraj0</a></p>
-
-      <div style="margin-top:12px; text-align:center">
-        <a href="https://komarev.com/ghpvc/?username=Shimulraj0&label=Profile%20Views&color=0e75b6&style=flat-square"><img alt="visitors" src="https://komarev.com/ghpvc/?username=Shimulraj0&label=Profile%20Views&color=0e75b6&style=flat-square"></a>
-      </div>
-    </section>
-
-    <footer>
-      <div>Made with ❤️ by <strong>Shimul Raj Das</strong> • © 2025</div>
+        <p>© 2025 Raj — All Rights Reserved</p>
     </footer>
-  </div>
 
-  <button id="toTop" aria-label="Back to top">⬆︎</button>
-
-  <script>
-    // Canvas background particles (lightweight)
-    const canvas = document.getElementById('bgCanvas');
-    const ctx = canvas.getContext('2d');
-    let W = canvas.width = innerWidth;
-    let H = canvas.height = innerHeight;
-    addEventListener('resize', ()=>{ W = canvas.width = innerWidth; H = canvas.height = innerHeight; });
-
-    const parts = [];
-    function addPart(x,y,burst=false){
-      const n = burst? 30 : 6;
-      for(let i=0;i<n;i++){
-        parts.push({ x, y, vx: (Math.random()-0.5)*(burst?8:2), vy: (Math.random()-0.5)*(burst?8:2), r: Math.random()*3 + (burst?1.5:0.6), life: Math.random()*60 + 40, hue: 200 + Math.random()*160 });
-      }
-      if(parts.length>2400) parts.splice(0, parts.length-1600);
-    }
-    addEventListener('mousemove', e => addPart(e.clientX, e.clientY));
-    addEventListener('click', e => addPart(e.clientX, e.clientY, true));
-
-    function frame(){
-      ctx.fillStyle = 'rgba(7,12,22,0.12)';
-      ctx.fillRect(0,0,W,H);
-      for(let i=parts.length-1;i>=0;i--){
-        const p=parts[i]; p.x+=p.vx; p.y+=p.vy; p.vx*=0.98; p.vy*=0.98; p.life--; p.r*=0.994;
-        if(p.life<=0||p.r<0.2){ parts.splice(i,1); continue; }
-        ctx.save(); ctx.globalCompositeOperation='lighter'; ctx.fillStyle=`hsla(${p.hue},90%,60%,${Math.max(0,p.life/120)})`; ctx.beginPath(); ctx.arc(p.x,p.y,p.r*2.8,0,Math.PI*2); ctx.fill(); ctx.restore();
-        ctx.beginPath(); ctx.fillStyle=`hsla(${p.hue},90%,60%,${Math.max(0,p.life/120)})`; ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill();
-      }
-      requestAnimationFrame(frame);
-    }
-    for(let i=0;i<160;i++) addPart(Math.random()*W, Math.random()*H);
-    frame();
-
-    // GSAP animations
-    gsap.registerPlugin(ScrollTrigger);
-    gsap.from("#hero .hero-left", {opacity:0, y:40, duration:1.2, ease:"power3.out"});
-    gsap.from("#hero .hero-right", {opacity:0, x:60, duration:1.2, delay:0.18, ease:"power3.out"});
-    gsap.utils.toArray('section.card').forEach((el,i)=>{
-      gsap.fromTo(el,{opacity:0,y:40},{opacity:1,y:0,duration:1,delay:0.08*i,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 85%',toggleActions:'play none none reverse'}})
-    });
-
-    // Theme toggle + resume button + to-top
-    const themeBtn = document.getElementById('themeToggle');
-    themeBtn.addEventListener('click', () => {
-      document.body.classList.toggle('light');
-      if (document.body.classList.contains('light')) themeBtn.textContent='🌙'; else themeBtn.textContent='🌓';
-    });
-
-    document.getElementById('downloadResume').addEventListener('click', ()=>{
-      window.open('assets/Shimul_Raj_Das_Resume.pdf','_blank');
-    });
-
-    const toTop = document.getElementById('toTop');
-    window.addEventListener('scroll', ()=>{ if(window.scrollY>400) toTop.style.display='block'; else toTop.style.display='none'; });
-    toTop.addEventListener('click', ()=> gsap.to(window, {scrollTo:0, duration:0.8, ease:'power2.inOut'}));
-
-    // Smooth scroll for nav links
-    document.querySelectorAll('.nav-links a').forEach(a=>{
-      a.addEventListener('click', e=>{ e.preventDefault(); const id = a.getAttribute('href'); document.querySelector(id).scrollIntoView({behavior:'smooth',block:'start'}); });
-    });
-
-    // small accessibility: keyboard focus visible
-    document.addEventListener('keyup', (e)=>{ if(e.key==='Tab') document.body.classList.add('show-focus'); });
-
-  </script>
 </body>
 </html>
