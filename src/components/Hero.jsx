@@ -64,9 +64,9 @@ function CountUp({ to, suffix = '' }) {
 }
 
 const chips = [
-  { name: 'Flutter', pos: '-left-4 top-8 sm:-left-8', delay: '0s' },
-  { name: 'OpenAI', pos: '-right-3 top-1/3 sm:-right-7', delay: '1.5s' },
-  { name: 'Android', pos: '-bottom-2 left-6 sm:-left-3 sm:bottom-10', delay: '3s' },
+  { name: 'Flutter', pos: '-left-4 top-8 sm:-left-8', delay: 0 },
+  { name: 'OpenAI', pos: '-right-3 top-1/3 sm:-right-7', delay: 4 },
+  { name: 'Android', pos: '-bottom-2 left-6 sm:-left-3 sm:bottom-10', delay: 8 },
 ]
 
 function Hero() {
@@ -93,6 +93,13 @@ const orb2Y = useTransform(sy, (v) => v * -40 + 20)
     )
     return () => tween.kill()
   }, [])
+
+  const chipOrbit = {
+    x: [0, 12, 0, -12, 0],
+    y: [-8, 0, 8, 0, -8],
+  }
+  const reduceMotion =
+    typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
   const onMove = (e) => {
     const rect = ref.current?.getBoundingClientRect()
@@ -303,8 +310,9 @@ const orb2Y = useTransform(sy, (v) => v * -40 + 20)
                 <motion.div
                   key={chip.name}
                   aria-hidden
-                  className={`glass-strong absolute ${chip.pos} z-10 rounded-2xl px-3 py-2 shadow-xl float-animation`}
-                  style={{ animationDelay: chip.delay }}
+                  className={`glass-strong absolute ${chip.pos} z-10 rounded-2xl px-3 py-2 shadow-xl`}
+                  animate={reduceMotion ? undefined : chipOrbit}
+                  transition={{ duration: 14, ease: 'easeInOut', repeat: Infinity, delay: chip.delay }}
                 >
                   <span className="flex items-center gap-2 text-xs font-semibold text-zinc-700 dark:text-zinc-200">
                     <TechIcon name={chip.name} size={16} />
