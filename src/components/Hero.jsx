@@ -7,9 +7,6 @@ import { TechIcon } from './TechIcons.jsx'
 import Tilt from './Tilt.jsx'
 import Magnetic from './Magnetic.jsx'
 import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
-gsap.registerPlugin(ScrollTrigger)
 
 const container = {
   hidden: {},
@@ -81,39 +78,8 @@ function Hero() {
   const sy = useSpring(my, { stiffness: 55, damping: 18, mass: 0.6 })
   const orb1X = useTransform(sx, (v) => v * 60 - 30)
   const orb1Y = useTransform(sy, (v) => v * 60 - 30)
-  const orb2X = useTransform(sx, (v) => v * -40 + 20)
-  const orb2Y = useTransform(sy, (v) => v * -40 + 20)
-  const chipX = useTransform(sx, (v) => (v - 0.5) * 24)
-  const chipY = useTransform(sy, (v) => (v - 0.5) * 16)
-
-  useEffect(() => {
-    const heroRef = ref.current
-    if (!heroRef) return
-
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: heroRef,
-        start: 'top top',
-        end: 'bottom top',
-        scrub: 1,
-      },
-    })
-
-    tl.to(heroRef.querySelector('.hero-glow-1'), {
-      y: -80,
-      opacity: 0.3,
-      ease: 'none',
-    })
-    .to(heroRef.querySelector('.hero-glow-2'), {
-      y: 60,
-      opacity: 0.2,
-      ease: 'none',
-    }, '<')
-
-    return () => {
-      ScrollTrigger.getAll().forEach(st => st.kill())
-    }
-  }, [])
+const orb2X = useTransform(sx, (v) => v * -40 + 20)
+const orb2Y = useTransform(sy, (v) => v * -40 + 20)
 
   useEffect(() => {
     const chars = nameRef.current?.querySelectorAll('.name-char')
@@ -145,22 +111,16 @@ function Hero() {
       {/* Animated gradient orbs */}
       <motion.div
         aria-hidden
-        className="pointer-events-none absolute -top-40 right-0 h-[480px] w-[480px] rounded-full bg-gradient-to-br from-terracotta-200/60 to-terracotta-100/40 blur-3xl dark:from-terracotta-500/15 dark:to-terracotta-500/10 hero-glow-1"
+        className="pointer-events-none absolute -top-40 right-0 h-[480px] w-[480px] rounded-full bg-gradient-to-br from-terracotta-200/60 to-terracotta-100/40 blur-3xl dark:from-terracotta-500/15 dark:to-terracotta-500/10"
         style={{ x: orb1X, y: orb1Y }}
-        animate={{
-          scale: [1, 1.1, 1],
-          opacity: [0.6, 0.8, 0.6],
-        }}
+        animate={{ opacity: [0.6, 0.8, 0.6] }}
         transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
       />
       <motion.div
         aria-hidden
-        className="pointer-events-none absolute -left-40 top-40 h-[400px] w-[400px] rounded-full bg-gradient-to-br from-teal-100/50 to-terracotta-100/40 blur-3xl dark:from-teal-500/10 dark:to-terracotta-500/10 hero-glow-2"
+        className="pointer-events-none absolute -left-40 top-40 h-[400px] w-[400px] rounded-full bg-gradient-to-br from-teal-100/50 to-terracotta-100/40 blur-3xl dark:from-teal-500/10 dark:to-terracotta-500/10"
         style={{ x: orb2X, y: orb2Y }}
-        animate={{
-          scale: [1.1, 1, 1.1],
-          opacity: [0.5, 0.7, 0.5],
-        }}
+        animate={{ opacity: [0.5, 0.7, 0.5] }}
         transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
       />
 
@@ -344,7 +304,7 @@ function Hero() {
                   key={chip.name}
                   aria-hidden
                   className={`glass-strong absolute ${chip.pos} z-10 rounded-2xl px-3 py-2 shadow-xl float-animation`}
-                  style={{ animationDelay: chip.delay, x: chipX, y: chipY }}
+                  style={{ animationDelay: chip.delay }}
                 >
                   <span className="flex items-center gap-2 text-xs font-semibold text-zinc-700 dark:text-zinc-200">
                     <TechIcon name={chip.name} size={16} />
