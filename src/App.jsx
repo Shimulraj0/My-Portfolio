@@ -44,7 +44,7 @@ function SmoothScroll() {
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined
 
-    const lenis = new Lenis({ lerp: 0.09 })
+    const lenis = new Lenis({ lerp: 0.075, wheelMultiplier: 0.9 })
 
     lenis.on('scroll', ScrollTrigger.update)
 
@@ -81,7 +81,7 @@ function SmoothScroll() {
 }
 
 function ScrollProgress() {
-  const scaleX = useSpring(useMotionValue(0), { stiffness: 100, damping: 25, mass: 0.3 })
+  const scaleX = useSpring(useMotionValue(0), { stiffness: 80, damping: 28, mass: 0.3 })
 
   useEffect(() => {
     const onScroll = () => {

@@ -48,7 +48,7 @@ section[id] {
 .reveal-up {
   opacity: 0;
   transform: translateY(40px);
-  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .reveal-up.revealed {
   opacity: 1;
@@ -58,7 +58,7 @@ section[id] {
 .reveal-left {
   opacity: 0;
   transform: translateX(-40px);
-  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .reveal-left.revealed {
   opacity: 1;
@@ -68,7 +68,7 @@ section[id] {
 .reveal-right {
   opacity: 0;
   transform: translateX(40px);
-  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .reveal-right.revealed {
   opacity: 1;
@@ -121,7 +121,7 @@ section[id] {
   50% { transform: translateY(-10px); }
 }
 .float-animation {
-  animation: float 6s ease-in-out infinite;
+  animation: float 7s ease-in-out infinite;
 }
 
 @keyframes pulse-glow {
@@ -129,7 +129,7 @@ section[id] {
   50% { box-shadow: 0 0 40px rgba(124, 58, 237, 0.4); }
 }
 .pulse-glow {
-  animation: pulse-glow 3s ease-in-out infinite;
+  animation: pulse-glow 4s ease-in-out infinite;
 }
 
 @keyframes shimmer {
@@ -306,7 +306,7 @@ html.lenis body {
 .marquee-track {
   display: flex;
   width: max-content;
-  animation: marquee-x 36s linear infinite;
+  animation: marquee-x 44s linear infinite;
   will-change: transform;
 }
 .marquee:hover .marquee-track {

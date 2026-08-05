@@ -90,7 +90,7 @@ function Lightbox({ project, index, onClose, onPrev, onNext }) {
           initial={{ opacity: 0, scale: 0.94 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.96 }}
-          transition={{ duration: 0.25 }}
+          transition={{ duration: 0.25, ease: 'easeOut' }}
           className="max-h-[88vh] rounded-2xl shadow-2xl"
           onClick={(e) => e.stopPropagation()}
         />
@@ -239,7 +239,7 @@ function Projects() {
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
           className="mb-12 text-center"
         >
           <p className="font-mono text-sm font-semibold uppercase tracking-widest text-terracotta-600 dark:text-terracotta-400">
@@ -258,7 +258,7 @@ function Projects() {
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-40px' }}
-          transition={{ duration: 0.4 }}
+          transition={{ duration: 0.5, ease: 'easeOut' }}
           className="mb-12 flex flex-wrap justify-center gap-2"
         >
           {categories.map((cat) => (
@@ -267,7 +267,7 @@ function Projects() {
               type="button"
               onClick={() => setActive(cat.id)}
               {...press}
-              transition={{ type: 'spring', stiffness: 500, damping: 22 }}
+              transition={{ type: 'spring', stiffness: 380, damping: 26 }}
               whileTap={{ scale: 0.92 }}
               className={`rounded-full px-4 py-2 text-sm font-semibold transition-all ${
                 active === cat.id

@@ -74,7 +74,7 @@ function SkillCard({ group, index }) {
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.5, delay: index * 0.08 }}
+      transition={{ duration: 0.6, delay: index * 0.08, ease: 'easeOut' }}
       className="spotlight-card glass relative overflow-hidden rounded-3xl p-5 transition-shadow hover:shadow-2xl hover:shadow-accent/10 dark:hover:shadow-accent/20 sm:p-6"
     >
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-terracotta-400/40 to-transparent" />
@@ -129,7 +129,7 @@ function Skills() {
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
           className="mb-14 text-center"
         >
           <p className="font-mono text-sm font-semibold uppercase tracking-widest text-terracotta-600 dark:text-terracotta-400">

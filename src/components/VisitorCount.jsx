@@ -28,7 +28,7 @@ function VisitorCount() {
     <motion.p
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.6 }}
+      transition={{ duration: 0.7, ease: 'easeOut' }}
       className="flex items-center gap-1.5 text-xs font-medium text-zinc-500 dark:text-zinc-400"
       title="Visitors"
     >

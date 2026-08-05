@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from 'react'
-import { motion, animate } from 'framer-motion'
+import { motion, animate, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { ArrowRight, Download, MapPin, Zap, Rocket, Globe } from 'lucide-react'
 import { profile } from '../data.js'
 import { GithubIcon, LinkedinIcon } from './BrandIcons.jsx'
@@ -75,7 +75,16 @@ const chips = [
 function Hero() {
   const ref = useRef(null)
   const nameRef = useRef(null)
-  const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 })
+  const mx = useMotionValue(0.5)
+  const my = useMotionValue(0.5)
+  const sx = useSpring(mx, { stiffness: 55, damping: 18, mass: 0.6 })
+  const sy = useSpring(my, { stiffness: 55, damping: 18, mass: 0.6 })
+  const orb1X = useTransform(sx, (v) => v * 60 - 30)
+  const orb1Y = useTransform(sy, (v) => v * 60 - 30)
+  const orb2X = useTransform(sx, (v) => v * -40 + 20)
+  const orb2Y = useTransform(sy, (v) => v * -40 + 20)
+  const chipX = useTransform(sx, (v) => (v - 0.5) * 24)
+  const chipY = useTransform(sy, (v) => (v - 0.5) * 16)
 
   useEffect(() => {
     const heroRef = ref.current
@@ -122,10 +131,8 @@ function Hero() {
   const onMove = (e) => {
     const rect = ref.current?.getBoundingClientRect()
     if (!rect) return
-    setMousePos({
-      x: (e.clientX - rect.left) / rect.width,
-      y: (e.clientY - rect.top) / rect.height,
-    })
+    mx.set((e.clientX - rect.left) / rect.width)
+    my.set((e.clientY - rect.top) / rect.height)
   }
 
   return (
@@ -139,7 +146,7 @@ function Hero() {
       <motion.div
         aria-hidden
         className="pointer-events-none absolute -top-40 right-0 h-[480px] w-[480px] rounded-full bg-gradient-to-br from-terracotta-200/60 to-terracotta-100/40 blur-3xl dark:from-terracotta-500/15 dark:to-terracotta-500/10 hero-glow-1"
-        style={{ x: mousePos.x * 60 - 30, y: mousePos.y * 60 - 30 }}
+        style={{ x: orb1X, y: orb1Y }}
         animate={{
           scale: [1, 1.1, 1],
           opacity: [0.6, 0.8, 0.6],
@@ -149,7 +156,7 @@ function Hero() {
       <motion.div
         aria-hidden
         className="pointer-events-none absolute -left-40 top-40 h-[400px] w-[400px] rounded-full bg-gradient-to-br from-teal-100/50 to-terracotta-100/40 blur-3xl dark:from-teal-500/10 dark:to-terracotta-500/10 hero-glow-2"
-        style={{ x: mousePos.x * -40 + 20, y: mousePos.y * -40 + 20 }}
+        style={{ x: orb2X, y: orb2Y }}
         animate={{
           scale: [1.1, 1, 1.1],
           opacity: [0.5, 0.7, 0.5],
@@ -226,7 +233,7 @@ function Hero() {
               <motion.a
                 href="#projects"
                 {...press}
-                transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+                transition={{ type: 'spring', stiffness: 320, damping: 24 }}
                 className="group inline-flex items-center gap-2 rounded-xl bg-terracotta-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-terracotta-600/25 transition-all hover:bg-terracotta-700 hover:shadow-terracotta-700/30 hover:scale-105"
               >
                 <Rocket size={16} />
@@ -240,7 +247,7 @@ function Hero() {
                 target="_blank"
                 rel="noreferrer"
                 {...press}
-                transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+                transition={{ type: 'spring', stiffness: 320, damping: 24 }}
                 className="inline-flex items-center gap-2 rounded-xl border border-zinc-300 bg-white px-6 py-3 text-sm font-semibold text-zinc-700 transition-all hover:border-terracotta-300 hover:text-terracotta-700 hover:scale-105 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:border-terracotta-500 dark:hover:text-terracotta-400"
               >
                 <Download size={16} />
@@ -258,7 +265,7 @@ function Hero() {
               target="_blank"
               rel="noreferrer"
               {...press}
-              transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+              transition={{ type: 'spring', stiffness: 320, damping: 24 }}
               className="flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-4 py-2 text-sm font-medium text-zinc-700 transition-all hover:border-terracotta-300 hover:text-terracotta-700 hover:scale-105 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:border-terracotta-500 dark:hover:text-terracotta-400"
             >
               <GithubIcon size={16} />
@@ -269,7 +276,7 @@ function Hero() {
               target="_blank"
               rel="noreferrer"
               {...press}
-              transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+              transition={{ type: 'spring', stiffness: 320, damping: 24 }}
               className="flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-4 py-2 text-sm font-medium text-zinc-700 transition-all hover:border-terracotta-300 hover:text-terracotta-700 hover:scale-105 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:border-terracotta-500 dark:hover:text-terracotta-400"
             >
               <LinkedinIcon size={16} />
@@ -295,7 +302,7 @@ function Hero() {
                 key={stat.label}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 + i * 0.1, duration: 0.5 }}
+                transition={{ delay: 0.5 + i * 0.1, duration: 0.6, ease: 'easeOut' }}
                 className="glass-strong flex flex-col items-center gap-1 rounded-2xl border border-white/50 px-4 py-2 backdrop-blur-md"
               >
                 <span className="text-terracotta-600 dark:text-terracotta-400">{stat.icon}</span>
@@ -337,7 +344,7 @@ function Hero() {
                   key={chip.name}
                   aria-hidden
                   className={`glass-strong absolute ${chip.pos} z-10 rounded-2xl px-3 py-2 shadow-xl float-animation`}
-                  style={{ animationDelay: chip.delay, x: (mousePos.x - 0.5) * 24, y: (mousePos.y - 0.5) * 16 }}
+                  style={{ animationDelay: chip.delay, x: chipX, y: chipY }}
                 >
                   <span className="flex items-center gap-2 text-xs font-semibold text-zinc-700 dark:text-zinc-200">
                     <TechIcon name={chip.name} size={16} />

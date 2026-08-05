@@ -38,8 +38,8 @@ export function useMagnetic(ref, strength = 0.15) {
     }
   }, [ref, strength, x, y])
 
-  const sx = useSpring(x, { stiffness: 400, damping: 30 })
-  const sy = useSpring(y, { stiffness: 400, damping: 30 })
+  const sx = useSpring(x, { stiffness: 200, damping: 24 })
+  const sy = useSpring(y, { stiffness: 200, damping: 24 })
   return { x: sx, y: sy }
 }
 
