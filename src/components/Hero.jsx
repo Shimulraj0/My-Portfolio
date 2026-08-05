@@ -336,7 +336,7 @@ function Hero() {
                 alt="Shimul Raj Das"
                 fetchPriority="high"
                 decoding="async"
-                className="relative aspect-square w-44 rounded-[2rem] border-4 border-white object-cover shadow-2xl sm:w-64 lg:w-80"
+                className="relative aspect-square w-52 rounded-[2rem] border-4 border-white object-cover shadow-2xl sm:w-64 lg:w-80"
               />
 
               {chips.map((chip) => (

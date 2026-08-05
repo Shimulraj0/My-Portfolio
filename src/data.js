@@ -1,4 +1,4 @@
-export const profile = {
+﻿export const profile = {
   name: 'Shimul Raj Das',
   role: 'Flutter Developer',
   tagline: ['Flutter Developer', 'AI & LLM Explorer', 'Android Tweaker', 'macOS Installer', 'Tech Enthusiast'],
@@ -13,14 +13,14 @@ export const profile = {
   education: {
     degree: 'Diploma in Engineering (CST)',
     school: 'Shariatpur Polytechnic Institute',
-    graduation: '2021–22',
+    graduation: '2021â€“22',
     cgpa: '3.50',
   },
   experience: [
     {
       role: 'Junior Flutter Developer',
       company: 'Sparktech Agency (Under Betopia Ltd)',
-      period: 'Dec 2025 – Apr 2026',
+      period: 'Dec 2025 â€“ Apr 2026',
       highlights: [
         'Developed cross-platform mobile apps with Flutter',
         'Converted Figma & FlutterFlow designs into responsive UIs',
@@ -30,7 +30,7 @@ export const profile = {
   ],
   about: [
     'I am a Flutter developer who loves turning ideas into polished mobile apps. Right now I am building a voice-controlled AI app and exploring LLMs for Bengali-English translation.',
-    'Beyond code, I am an Android enthusiast — flashing AOSP ROMs, recoveries, and bootloaders — and I built my own Hackintosh (macOS on PC) for the fun of it.',
+    'Beyond code, I am an Android enthusiast â€” flashing AOSP ROMs, recoveries, and bootloaders â€” and I built my own Hackintosh (macOS on PC) for the fun of it.',
     'I enjoy IT support, hardware troubleshooting, and learning cross-platform development and smart automation.',
   ],
 }
@@ -44,7 +44,7 @@ export const skills = [
   {
     group: 'AI & Language Models',
     icon: 'brain',
-    items: ['OpenAI GPT API', 'LLM Applications', 'LangGraph', 'AI Automation', 'n8n Workflows', 'Computer Vision', 'AI Apps', 'AI Voice Apps', 'Bengali–English Translation'],
+    items: ['OpenAI GPT API', 'LLM Applications', 'LangGraph', 'AI Automation', 'n8n Workflows', 'Computer Vision', 'AI Apps', 'AI Voice Apps', 'Bengaliâ€“English Translation'],
   },
   {
     group: 'Web & Frontend',
@@ -85,15 +85,15 @@ export const projects = [
     repo: 'FindMed',
     category: 'health',
     tag: 'Health',
-    screenshot: './screenshots/medfinder.png',
+    screenshot: './screenshots/medfinder.jpg',
     url: 'https://github.com/Shimulraj0/FindMed',
     description:
-      'Bangladesh medicine finder — search DIMS & MedEx catalogs for local and imported medicines, with brand alternatives and quick details.',
+      'Bangladesh medicine finder â€” search DIMS & MedEx catalogs for local and imported medicines, with brand alternatives and quick details.',
     features: ['DIMS & MedEx search', 'Brand alternatives', 'Fast results'],
     screenshots: [
-      './screenshots/medfinder/splash.png',
-      './screenshots/medfinder/search.png',
-      './screenshots/medfinder/results.png',
+      './screenshots/medfinder/splash.jpg',
+      './screenshots/medfinder/search.jpg',
+      './screenshots/medfinder/results.jpg',
     ],
   },
   {
@@ -102,15 +102,15 @@ export const projects = [
     repo: 'AI_CAR_MAINTAINANCE',
     category: 'ai',
     tag: 'AI',
-    screenshot: './screenshots/auto-intel.png',
+    screenshot: './screenshots/auto-intel.jpg',
     url: 'https://github.com/Shimulraj0/AI_CAR_MAINTAINANCE',
     description:
       'AI-powered car maintenance companion. Diagnoses vehicle issues, tracks maintenance schedules, warns when service is due, and stores inspection reports.',
     features: ['AI vehicle diagnosis', 'Maintenance reminders', 'Report import & history'],
     screenshots: [
-      './screenshots/auto-intel/onboarding.png',
-      './screenshots/auto-intel/login.png',
-      './screenshots/auto-intel/signup.png',
+      './screenshots/auto-intel/onboarding.jpg',
+      './screenshots/auto-intel/login.jpg',
+      './screenshots/auto-intel/signup.jpg',
     ],
   },
   {
@@ -119,16 +119,16 @@ export const projects = [
     repo: 'Football-AI',
     category: 'ai',
     tag: 'AI',
-    screenshot: './screenshots/football-ai.png',
+    screenshot: './screenshots/football-ai.jpg',
     url: 'https://github.com/Shimulraj0/Football-AI',
     description:
-      'A full club-management platform for football academies — age groups, tryouts, curriculum engine, coach AI assistant, attendance, billing, and analytics dashboards.',
+      'A full club-management platform for football academies â€” age groups, tryouts, curriculum engine, coach AI assistant, attendance, billing, and analytics dashboards.',
     features: ['Club Command Center', 'AI assistant & analytics', 'Tryout scoring & placement'],
     screenshots: [
-      './screenshots/football-ai/welcome.png',
-      './screenshots/football-ai/login.png',
-      './screenshots/football-ai/roles.png',
-      './screenshots/football-ai/command-center.png',
+      './screenshots/football-ai/welcome.jpg',
+      './screenshots/football-ai/login.jpg',
+      './screenshots/football-ai/roles.jpg',
+      './screenshots/football-ai/command-center.jpg',
     ],
   },
   {
@@ -137,16 +137,16 @@ export const projects = [
     repo: 'TASK_APP',
     category: 'productivity',
     tag: 'Utility',
-    screenshot: './screenshots/taskapp.png',
+    screenshot: './screenshots/taskapp.jpg',
     url: 'https://github.com/Shimulraj0/TASK_APP',
     description:
       'A clean task-management application for organizing daily work and student records, with forms and list management built in Flutter.',
     features: ['Task & list management', 'Form handling', 'Lightweight & fast'],
     screenshots: [
-      './screenshots/taskapp/login.png',
-      './screenshots/taskapp/getstarted.png',
-      './screenshots/taskapp/home.png',
-      './screenshots/taskapp/profile.png',
+      './screenshots/taskapp/login.jpg',
+      './screenshots/taskapp/getstarted.jpg',
+      './screenshots/taskapp/home.jpg',
+      './screenshots/taskapp/profile.jpg',
     ],
   },
   {
@@ -155,16 +155,16 @@ export const projects = [
     repo: 'Gran-Guide-App',
     category: 'productivity',
     tag: 'Safety',
-    screenshot: './screenshots/gran-guide.png',
+    screenshot: './screenshots/gran-guide.jpg',
     url: 'https://github.com/Shimulraj0/Gran-Guide-App',
     description:
-      'Digital safety and education app for seniors — guides on staying safe on Facebook & WhatsApp, call blocking, FAQ, and subscription-based protection plans.',
+      'Digital safety and education app for seniors â€” guides on staying safe on Facebook & WhatsApp, call blocking, FAQ, and subscription-based protection plans.',
     features: ['Online safety guides', 'Call protection', 'Subscription plans'],
     screenshots: [
-      './screenshots/gran-guide/welcome.png',
-      './screenshots/gran-guide/mission.png',
-      './screenshots/gran-guide/auth.png',
-      './screenshots/gran-guide/signup.png',
+      './screenshots/gran-guide/welcome.jpg',
+      './screenshots/gran-guide/mission.jpg',
+      './screenshots/gran-guide/auth.jpg',
+      './screenshots/gran-guide/signup.jpg',
     ],
   },
   {
@@ -173,15 +173,15 @@ export const projects = [
     repo: 'Peptide',
     category: 'health',
     tag: 'Health',
-    screenshot: './screenshots/peptide.png',
+    screenshot: './screenshots/peptide.jpg',
     url: 'https://github.com/Shimulraj0/Peptide',
     description:
       'A health tracker for peptide protocols with built-in protocol presets (like BPC-157), push notifications, activity logs, and personal settings.',
     features: ['Protocol presets', 'Push notifications', 'Activity tracking'],
     screenshots: [
-      './screenshots/peptide/splash.png',
-      './screenshots/peptide/login.png',
-      './screenshots/peptide/signup.png',
+      './screenshots/peptide/splash.jpg',
+      './screenshots/peptide/login.jpg',
+      './screenshots/peptide/signup.jpg',
     ],
   },
   {
@@ -190,15 +190,15 @@ export const projects = [
     repo: 'wonderland',
     category: 'entertainment',
     tag: 'Kids',
-    screenshot: './screenshots/wonderland.png',
+    screenshot: './screenshots/wonderland.jpg',
     url: 'https://github.com/Shimulraj0/wonderland',
     description:
       'A delightful storybook app for children with interactive tales like "Emma & the Pirate Treasure", an onboarding flow, and a colorful reading experience.',
     features: ['Interactive stories', 'Onboarding experience', 'Kid-friendly UI'],
     screenshots: [
-      './screenshots/wonderland/onboarding.png',
-      './screenshots/wonderland/login.png',
-      './screenshots/wonderland/signup.png',
+      './screenshots/wonderland/onboarding.jpg',
+      './screenshots/wonderland/login.jpg',
+      './screenshots/wonderland/signup.jpg',
     ],
   },
   {
@@ -207,16 +207,16 @@ export const projects = [
     repo: 'Bluetooth-Media-Player',
     category: 'wearables',
     tag: 'Wearable',
-    screenshot: './screenshots/bluetooth.png',
+    screenshot: './screenshots/bluetooth.jpg',
     url: 'https://github.com/Shimulraj0/Bluetooth-Media-Player',
     description:
-      'A wearable prototype media player that connects to Bluetooth devices — device pairing, playback control, and settings tuned for small screens.',
+      'A wearable prototype media player that connects to Bluetooth devices â€” device pairing, playback control, and settings tuned for small screens.',
     features: ['Bluetooth device connection', 'Media playback control', 'Wearable-first UI'],
     screenshots: [
-      './screenshots/bluetooth/bluetooth.png',
-      './screenshots/bluetooth/contacts.png',
-      './screenshots/bluetooth/media.png',
-      './screenshots/bluetooth/settings.png',
+      './screenshots/bluetooth/bluetooth.jpg',
+      './screenshots/bluetooth/contacts.jpg',
+      './screenshots/bluetooth/media.jpg',
+      './screenshots/bluetooth/settings.jpg',
     ],
   },
 ]
