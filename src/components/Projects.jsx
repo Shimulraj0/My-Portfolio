@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { ArrowUpRight, ChevronLeft, ChevronRight, X, Filter } from 'lucide-react'
+import { ArrowUpRight, ChevronLeft, ChevronRight, X, Filter, Sparkles } from 'lucide-react'
 import { categories, projects } from '../data.js'
 import { GithubIcon } from './BrandIcons.jsx'
 import Tilt from './Tilt.jsx'

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Smartphone, Brain, Terminal, Wrench, Code, Rocket, Zap, Cpu } from 'lucide-react'
 import { skills } from '../data.js'
