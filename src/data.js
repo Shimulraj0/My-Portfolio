@@ -44,7 +44,7 @@ export const skills = [
   {
     group: 'AI & Language Models',
     icon: 'brain',
-    items: ['OpenAI GPT API', 'LLM Applications', 'AI Voice Apps', 'Bengali–English Translation'],
+    items: ['OpenAI GPT API', 'LLM Applications', 'AI Automation', 'n8n Workflows', 'AI Voice Apps', 'Bengali–English Translation'],
   },
   {
     group: 'Programming & Systems',

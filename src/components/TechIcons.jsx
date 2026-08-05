@@ -12,6 +12,8 @@ import {
   Shield,
   Code2,
   Cpu,
+  Bot,
+  Workflow,
 } from 'lucide-react'
 
 function BrandIcon({ d, size = 18, className = '' }) {
@@ -82,6 +84,8 @@ const GENERICS = {
   rest: { Icon: Plug, color: 'text-accent', label: 'REST APIs' },
   mvvm: { Icon: Layers, color: 'text-accent', label: 'MVVM & Provider' },
   llm: { Icon: BrainCircuit, color: 'text-accent', label: 'LLMs' },
+  automation: { Icon: Bot, color: 'text-accent', label: 'AI Automation' },
+  n8n: { Icon: Workflow, color: 'text-pink-500', label: 'n8n' },
   voice: { Icon: Mic, color: 'text-terracotta-500', label: 'Voice AI' },
   translation: { Icon: Languages, color: 'text-accent', label: 'Translation' },
   java: { Icon: Coffee, color: 'text-orange-500', label: 'Java' },
@@ -102,6 +106,8 @@ const RULES = [
   ['rest', 'rest'],
   ['mvvm', 'mvvm'],
   ['llm', 'llm'],
+  ['automation', 'automation'],
+  ['n8n', 'n8n'],
   ['voice', 'voice'],
   ['translation', 'translation'],
   ['android studio', 'studio'],

@@ -1,9 +1,13 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { Smartphone, Brain, Terminal, Wrench } from 'lucide-react'
 import { skills } from '../data.js'
 import { TechIcon } from './TechIcons.jsx'
 import { useSpotlight } from '../hooks/useSpotlight.js'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
 
 const iconMap = {
   smartphone: Smartphone,
@@ -19,45 +23,46 @@ const colors = {
   wrench: 'from-accent to-accent-light',
 }
 
-function SkillRow({ skill, delay }) {
-  const barRef = useRef(null)
-  const [visible, setVisible] = useState(false)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true)
-          observer.disconnect()
-        }
-      },
-      { threshold: 0.3 }
-    )
-    if (barRef.current) observer.observe(barRef.current)
-    return () => observer.disconnect()
-  }, [])
-
-  return (
-    <div ref={barRef} className="mb-4 last:mb-0">
-      <div className="mb-1 flex items-center gap-2">
-        <TechIcon name={skill} size={15} />
-        <span className="text-sm font-medium text-zinc-700 dark:text-zinc-300">{skill}</span>
-      </div>
-      <div className="h-1.5 overflow-hidden rounded-full bg-zinc-100 dark:bg-zinc-800">
-        <motion.div
-          className="h-full rounded-full bg-gradient-to-r from-terracotta-500 to-accent skill-bar-fill"
-          initial={{ width: 0 }}
-          animate={{ width: visible ? '100%' : 0 }}
-          transition={{ duration: 1.2, delay, ease: [0.16, 1, 0.3, 1] }}
-        />
-      </div>
-    </div>
-  )
-}
-
 function SkillCard({ group, index }) {
   const spotlight = useSpotlight()
+  const batchRef = useRef(null)
   const Icon = iconMap[group.icon]
+
+  useEffect(() => {
+    const el = batchRef.current
+    if (!el) return undefined
+    const tiles = el.querySelectorAll('.skill-tile')
+    if (!tiles.length) return undefined
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined
+
+    gsap.set(tiles, {
+      opacity: 0,
+      rotationX: -90,
+      y: 30,
+      transformPerspective: 900,
+      transformOrigin: '50% 100%',
+    })
+
+    const batch = ScrollTrigger.batch(tiles, {
+      start: 'top 88%',
+      once: true,
+      onEnter: (entered) =>
+        gsap.to(entered, {
+          opacity: 1,
+          rotationX: 0,
+          y: 0,
+          duration: 0.65,
+          stagger: 0.07,
+          ease: 'back.out(1.7)',
+          onComplete: () => gsap.set(entered, { clearProps: 'transform' }),
+        }),
+    })
+
+    return () => {
+      batch?.scrollTriggers?.forEach((st) => st.kill())
+    }
+  }, [])
 
   return (
     <motion.div
@@ -65,22 +70,34 @@ function SkillCard({ group, index }) {
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      whileHover={{ y: -6, scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
-      className="spotlight-card glass relative overflow-hidden rounded-3xl p-6 transition-all hover:shadow-2xl hover:shadow-accent/10 dark:hover:shadow-accent/20"
+      transition={{ duration: 0.5, delay: index * 0.08 }}
+      className="spotlight-card glass relative overflow-hidden rounded-3xl p-5 transition-shadow hover:shadow-2xl hover:shadow-accent/10 dark:hover:shadow-accent/20 sm:p-6"
     >
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-terracotta-400/40 to-transparent" />
       <div className="relative">
-        <span
-          className={`inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br ${colors[group.icon] || 'from-terracotta-500 to-terracotta-600'} text-white shadow-lg`}
-        >
-          <Icon size={24} />
-        </span>
-        <h3 className="mt-5 font-bold text-zinc-900 dark:text-white">{group.group}</h3>
-        <div className="mt-4">
-          {group.items.map((item, j) => (
-            <SkillRow key={item} skill={item} delay={index * 0.1 + j * 0.08} />
+        <div className="mb-4 flex items-center gap-3">
+          <span
+            className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br ${colors[group.icon] || 'from-terracotta-500 to-terracotta-600'} text-white shadow-lg`}
+          >
+            <Icon size={22} />
+          </span>
+          <h3 className="text-base font-bold text-zinc-900 dark:text-white">{group.group}</h3>
+        </div>
+
+        <div ref={batchRef} className="grid grid-cols-2 gap-2.5" style={{ transformStyle: 'preserve-3d' }}>
+          {group.items.map((item) => (
+            <div
+              key={item}
+              className="skill-tile group relative flex min-h-[4.5rem] cursor-default flex-col items-center justify-center gap-1.5 rounded-2xl border border-white/60 bg-white/70 px-2 py-3 text-center shadow-sm transition-all duration-300 hover:border-terracotta-300/70 hover:shadow-xl hover:shadow-terracotta-500/10 dark:border-white/10 dark:bg-zinc-800/70 dark:hover:border-accent/40 dark:hover:shadow-accent/20"
+              style={{ transformStyle: 'preserve-3d' }}
+            >
+              <span className="transition-transform duration-300 group-hover:-translate-y-1">
+                <TechIcon name={item} size={22} />
+              </span>
+              <span className="text-[10.5px] font-semibold leading-tight text-zinc-700 dark:text-zinc-300">
+                {item}
+              </span>
+            </div>
           ))}
         </div>
       </div>
@@ -118,7 +135,7 @@ function Skills() {
             What I work with
           </h2>
           <p className="mx-auto mt-3 max-w-lg text-sm text-zinc-500 dark:text-zinc-400">
-            A curated set of tools and technologies I use to build polished products.
+            A curated batch of tools and technologies I use to build polished products.
           </p>
         </motion.div>
 
