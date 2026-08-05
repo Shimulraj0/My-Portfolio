@@ -1,0 +1,7 @@
+name = "shimul-ai"
+main = "index.js"
+compatibility_date = "2025-01-01"
+
+kv_namespaces = [
+  { binding = "VISITS", id = "ebcbe0afb0a549f3ae42353b625c0cfb" }
+]

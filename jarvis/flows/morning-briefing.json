@@ -1,0 +1,14 @@
+{
+  "id": "morning-briefing",
+  "name": "Morning Briefing",
+  "nodes": [
+    { "id": "n1", "type": "trigger.cron", "params": { "cron": "0 8 * * *" } },
+    { "id": "n2", "type": "code", "params": { "source": "result = {'greeting': 'good morning, shimul'}" } },
+    { "id": "n3", "type": "notify.ui", "params": { "title": "Briefing", "message": "{{n2.greeting}}" } }
+  ],
+  "connections": {
+    "n1": { "out": ["n2"] },
+    "n2": { "out": ["n3"] }
+  },
+  "params": { "cron": "0 8 * * *" }
+}

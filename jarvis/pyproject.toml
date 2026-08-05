@@ -1,0 +1,28 @@
+[project]
+name = "jarvis"
+version = "0.1.0"
+description = "J.A.R.V.I.S — local-first personal AI assistant (memory graph, voice, LangGraph, n8n-style flows, Obsidian)"
+requires-python = ">=3.11"
+dependencies = ["PyYAML>=6.0"]
+
+[project.optional-dependencies]
+embeddings = ["sentence-transformers"]
+voice = ["faster-whisper", "piper-tts", "openwakeword", "sounddevice"]
+agents = ["langgraph", "langchain-core", "langchain"]
+workflows = ["APScheduler"]
+api = ["fastapi", "uvicorn", "websockets", "httpx"]
+dev = ["pytest"]
+
+[project.scripts]
+jarvis = "jarvis.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
