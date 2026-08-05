@@ -3,7 +3,9 @@ import { motion } from 'framer-motion'
 import { ArrowRight, Download, MapPin, Sparkles, Zap, Rocket, Globe } from 'lucide-react'
 import { profile } from '../data.js'
 import { GithubIcon, LinkedinIcon } from './BrandIcons.jsx'
+import { TechIcon } from './TechIcons.jsx'
 import Tilt from './Tilt.jsx'
+import Magnetic from './Magnetic.jsx'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -23,6 +25,12 @@ const item = {
 
 const press = { whileTap: { scale: 0.96 }, whileHover: { scale: 1.03 } }
 
+const chips = [
+  { name: 'Flutter', pos: '-left-4 top-8 sm:-left-8', delay: '0s' },
+  { name: 'OpenAI', pos: '-right-3 top-1/3 sm:-right-7', delay: '1.5s' },
+  { name: 'Android', pos: '-bottom-2 left-6 sm:-left-3 sm:bottom-10', delay: '3s' },
+]
+
 function Hero() {
   const ref = useRef(null)
   const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 })
@@ -31,7 +39,6 @@ function Hero() {
     const heroRef = ref.current
     if (!heroRef) return
 
-    // GSAP scroll-based parallax
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: heroRef,
@@ -65,9 +72,6 @@ function Hero() {
       y: (e.clientY - rect.top) / rect.height,
     })
   }
-
-  const glowX = mousePos.x * 100
-  const glowY = mousePos.y * 100
 
   return (
     <section
@@ -150,27 +154,31 @@ function Hero() {
             variants={item}
             className="mt-8 flex flex-wrap items-center justify-center gap-4 md:justify-start"
           >
-            <motion.a
-              href="#projects"
-              {...press}
-              transition={{ type: 'spring', stiffness: 400, damping: 20 }}
-              className="group inline-flex items-center gap-2 rounded-xl bg-terracotta-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-terracotta-600/25 transition-all hover:bg-terracotta-700 hover:shadow-terracotta-700/30 hover:scale-105"
-            >
-              <Rocket size={16} />
-              View My Work
-              <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
-            </motion.a>
-            <motion.a
-              href={profile.resume}
-              target="_blank"
-              rel="noreferrer"
-              {...press}
-              transition={{ type: 'spring', stiffness: 400, damping: 20 }}
-              className="inline-flex items-center gap-2 rounded-xl border border-zinc-300 bg-white px-6 py-3 text-sm font-semibold text-zinc-700 transition-all hover:border-terracotta-300 hover:text-terracotta-700 hover:scale-105 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:border-terracotta-500 dark:hover:text-terracotta-400"
-            >
-              <Download size={16} />
-              Resume
-            </motion.a>
+            <Magnetic>
+              <motion.a
+                href="#projects"
+                {...press}
+                transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+                className="group inline-flex items-center gap-2 rounded-xl bg-terracotta-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-terracotta-600/25 transition-all hover:bg-terracotta-700 hover:shadow-terracotta-700/30 hover:scale-105"
+              >
+                <Rocket size={16} />
+                View My Work
+                <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
+              </motion.a>
+            </Magnetic>
+            <Magnetic>
+              <motion.a
+                href={profile.resume}
+                target="_blank"
+                rel="noreferrer"
+                {...press}
+                transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+                className="inline-flex items-center gap-2 rounded-xl border border-zinc-300 bg-white px-6 py-3 text-sm font-semibold text-zinc-700 transition-all hover:border-terracotta-300 hover:text-terracotta-700 hover:scale-105 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:border-terracotta-500 dark:hover:text-terracotta-400"
+              >
+                <Download size={16} />
+                Resume
+              </motion.a>
+            </Magnetic>
           </motion.div>
 
           <motion.div
@@ -220,7 +228,7 @@ function Hero() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 + i * 0.1, duration: 0.5 }}
-                className="flex flex-col items-center gap-1 rounded-2xl border border-zinc-100 bg-white/60 px-4 py-2 backdrop-blur dark:border-zinc-800 dark:bg-zinc-900/60"
+                className="glass-strong flex flex-col items-center gap-1 rounded-2xl border border-white/50 px-4 py-2 backdrop-blur-md"
               >
                 <span className="text-terracotta-600 dark:text-terracotta-400">{stat.icon}</span>
                 <span className="text-lg font-bold text-zinc-900 dark:text-white">{stat.value}</span>
@@ -240,21 +248,51 @@ function Hero() {
             <div className="relative">
               <div
                 aria-hidden
+                className="absolute -inset-6 -z-10 rounded-[3rem] bg-[conic-gradient(from_180deg,#e76f51,#7c3aed,#264653,#e76f51)] opacity-50 blur-2xl"
+              />
+              <div
+                aria-hidden
                 className="absolute -inset-4 rounded-[2.5rem] bg-gradient-to-br from-navy/20 to-terracotta-500/25 blur-2xl pulse-glow"
               />
               <img
                 src={profile.photo}
                 alt="Shimul Raj Das"
+                fetchPriority="high"
+                decoding="async"
                 className="relative aspect-square w-64 rounded-[2rem] border-4 border-white object-cover shadow-2xl sm:w-80"
               />
-              <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 rounded-2xl border border-terracotta-100 bg-white px-5 py-2.5 text-center shadow-xl dark:border-zinc-700 dark:bg-zinc-900">
-                <p className="font-mono text-xs font-semibold text-terracotta-700">
+
+              {chips.map((chip) => (
+                <motion.div
+                  key={chip.name}
+                  aria-hidden
+                  className={`glass-strong absolute ${chip.pos} z-10 rounded-2xl px-3 py-2 shadow-xl float-animation`}
+                  style={{ animationDelay: chip.delay, x: (mousePos.x - 0.5) * 24, y: (mousePos.y - 0.5) * 16 }}
+                >
+                  <span className="flex items-center gap-2 text-xs font-semibold text-zinc-700 dark:text-zinc-200">
+                    <TechIcon name={chip.name} size={16} />
+                    {chip.name}
+                  </span>
+                </motion.div>
+              ))}
+
+              <div className="absolute -bottom-5 left-1/2 z-20 -translate-x-1/2 rounded-2xl border border-terracotta-100 bg-white px-5 py-2.5 text-center shadow-xl dark:border-zinc-700 dark:bg-zinc-900">
+                <p className="flex items-center gap-2 font-mono text-xs font-semibold text-terracotta-700 dark:text-terracotta-300">
+                  <TechIcon name="Flutter" size={13} />
                   Flutter A AI A Android
                 </p>
               </div>
             </div>
           </Tilt>
         </motion.div>
+      </div>
+
+      {/* Scroll cue */}
+      <div aria-hidden className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-zinc-400 dark:text-zinc-500 md:flex">
+        <span className="font-mono text-[10px] uppercase tracking-widest">scroll</span>
+        <span className="flex h-8 w-5 items-start justify-center rounded-full border border-current p-1">
+          <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-current" />
+        </span>
       </div>
     </section>
   )

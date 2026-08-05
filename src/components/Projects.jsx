@@ -1,9 +1,10 @@
 import { useState, useCallback, useEffect } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { ArrowUpRight, ChevronLeft, ChevronRight, X, Filter, Sparkles } from 'lucide-react'
+import { ArrowUpRight, ChevronLeft, ChevronRight, X, Sparkles } from 'lucide-react'
 import { categories, projects } from '../data.js'
 import { GithubIcon } from './BrandIcons.jsx'
 import Tilt from './Tilt.jsx'
+import { useSpotlight } from '../hooks/useSpotlight.js'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -113,6 +114,7 @@ function Lightbox({ project, index, onClose, onPrev, onNext }) {
 
 function ProjectCard({ project }) {
   const [lightbox, setLightbox] = useState(null)
+  const spotlight = useSpotlight()
 
   const show = useCallback((i) => setLightbox(i), [])
   const close = useCallback(() => setLightbox(null), [])
@@ -127,12 +129,13 @@ function ProjectCard({ project }) {
 
   return (
     <motion.article
+      {...spotlight}
       layout
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-40px' }}
       transition={{ duration: 0.5, ease: 'easeOut' }}
-      className="group relative overflow-hidden rounded-3xl border border-zinc-100 bg-white p-6 shadow-sm transition-all card-lift dark:border-zinc-800 dark:bg-zinc-900"
+      className="spotlight-card glass group relative overflow-hidden rounded-3xl p-6 transition-all card-lift dark:border-zinc-800"
     >
       <Tilt max={7} className="relative">
         <div className="absolute -top-1 -right-1 z-10">
@@ -227,7 +230,10 @@ function Projects() {
     active === 'all' ? projects : projects.filter((p) => p.category === active)
 
   return (
-    <section id="projects" className="bg-white py-24 transition-colors duration-300 dark:bg-zinc-950">
+    <section
+      id="projects"
+      className="relative overflow-hidden bg-gradient-to-b from-white via-cream to-white py-24 transition-colors duration-300 dark:from-zinc-950 dark:via-zinc-900/40 dark:to-zinc-950"
+    >
       <div className="mx-auto max-w-6xl px-6">
         <motion.div
           initial={{ opacity: 0, y: 24 }}

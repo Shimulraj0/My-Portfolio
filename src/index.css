@@ -161,10 +161,92 @@ section[id] {
   box-shadow: 0 0 30px rgba(124, 58, 237, 0.1);
 }
 
+/* ---- Glassmorphism system (color theory: warm terracotta primary + violet accent over cream/near-black) ---- */
+.glass {
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  box-shadow: 0 8px 32px rgba(29, 53, 87, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+.dark .glass {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.09);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+.glass-strong {
+  background: rgba(255, 255, 255, 0.78);
+  border-color: rgba(255, 255, 255, 0.9);
+}
+.dark .glass-strong {
+  background: rgba(24, 24, 27, 0.72);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass { background: rgba(255, 255, 255, 0.94); }
+  .dark .glass { background: rgba(24, 24, 27, 0.97); }
+}
+
+/* ---- Cursor-following spotlight (mouse interaction) ---- */
+.spotlight-card {
+  position: relative;
+}
+.spotlight-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  background: radial-gradient(
+    260px circle at var(--spot-x, 50%) var(--spot-y, 50%),
+    rgba(231, 111, 81, 0.12),
+    transparent 62%
+  );
+}
+.dark .spotlight-card::after {
+  background: radial-gradient(
+    280px circle at var(--spot-x, 50%) var(--spot-y, 50%),
+    rgba(124, 58, 237, 0.18),
+    transparent 62%
+  );
+}
+.spotlight-card:hover::after {
+  opacity: 1;
+}
+
+/* ---- Ambient cursor glow ---- */
+.cursor-glow {
+  background: radial-gradient(
+    circle,
+    rgba(231, 111, 81, 0.13),
+    rgba(231, 111, 81, 0.04) 40%,
+    transparent 65%
+  );
+  mix-blend-mode: normal;
+}
+.dark .cursor-glow {
+  background: radial-gradient(
+    circle,
+    rgba(124, 58, 237, 0.16),
+    rgba(124, 58, 237, 0.05) 40%,
+    transparent 65%
+  );
+}
+
+/* ---- Brand flavor ---- */
+::selection {
+  background: rgba(231, 111, 81, 0.28);
+}
+
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: #d4d4d8; border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: #a1a1aa; }
+.dark ::-webkit-scrollbar-thumb { background: #3f3f46; }
+.dark ::-webkit-scrollbar-thumb:hover { background: #52525b; }
 
 @media (prefers-reduced-motion: reduce) {
   .reveal-up, .reveal-left, .reveal-right {
@@ -175,6 +257,8 @@ section[id] {
   .float-animation { animation: none; }
   .pulse-glow { animation: none; }
   .shimmer { animation: none; }
+  .cursor-glow { display: none !important; }
+  .spotlight-card::after { display: none; }
 }
 
 @media (max-width: 640px) {

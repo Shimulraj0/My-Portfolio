@@ -29,10 +29,11 @@ function Navbar() {
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'border-b border-terracotta-100/80 bg-white/80 backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-950/80'
+          ? 'border-b border-white/60 bg-white/70 shadow-lg shadow-zinc-900/5 backdrop-blur-xl backdrop-saturate-150 dark:border-zinc-800/80 dark:bg-zinc-950/70 dark:shadow-black/30'
           : 'bg-transparent'
       }`}
     >
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-terracotta-500/40 to-transparent" />
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
         <motion.a
           href="#home"
