@@ -1,4 +1,4 @@
-﻿export const profile = {
+export const profile = {
   name: 'Shimul Raj Das',
   role: 'Flutter Developer',
   tagline: ['Flutter Developer', 'AI & LLM Explorer', 'Android Tweaker', 'macOS Installer', 'Tech Enthusiast'],
@@ -13,14 +13,14 @@
   education: {
     degree: 'Diploma in Engineering (CST)',
     school: 'Shariatpur Polytechnic Institute',
-    graduation: '2021â€“22',
+    graduation: '21-22',
     cgpa: '3.50',
   },
   experience: [
     {
       role: 'Junior Flutter Developer',
       company: 'Sparktech Agency (Under Betopia Ltd)',
-      period: 'Dec 2025 â€“ Apr 2026',
+      period: 'Dec 2025 - Apr 2026',
       highlights: [
         'Developed cross-platform mobile apps with Flutter',
         'Converted Figma & FlutterFlow designs into responsive UIs',
@@ -30,7 +30,7 @@
   ],
   about: [
     'I am a Flutter developer who loves turning ideas into polished mobile apps. Right now I am building a voice-controlled AI app and exploring LLMs for Bengali-English translation.',
-    'Beyond code, I am an Android enthusiast â€” flashing AOSP ROMs, recoveries, and bootloaders â€” and I built my own Hackintosh (macOS on PC) for the fun of it.',
+    'Beyond code, I am an Android enthusiast - flashing AOSP ROMs, recoveries, and bootloaders - and I built my own Hackintosh (macOS on PC) for the fun of it.',
     'I enjoy IT support, hardware troubleshooting, and learning cross-platform development and smart automation.',
   ],
 }
@@ -44,7 +44,7 @@ export const skills = [
   {
     group: 'AI & Language Models',
     icon: 'brain',
-    items: ['OpenAI GPT API', 'LLM Applications', 'LangGraph', 'AI Automation', 'n8n Workflows', 'Computer Vision', 'AI Apps', 'AI Voice Apps', 'Bengaliâ€“English Translation'],
+    items: ['OpenAI GPT API', 'LLM Applications', 'LangGraph', 'AI Automation', 'n8n Workflows', 'Computer Vision', 'AI Apps', 'AI Voice Apps', 'Bengali-English Translation'],
   },
   {
     group: 'Web & Frontend',
@@ -88,7 +88,7 @@ export const projects = [
     screenshot: './screenshots/medfinder.jpg',
     url: 'https://github.com/Shimulraj0/FindMed',
     description:
-      'Bangladesh medicine finder â€” search DIMS & MedEx catalogs for local and imported medicines, with brand alternatives and quick details.',
+      'Bangladesh medicine finder - search DIMS & MedEx catalogs for local and imported medicines, with brand alternatives and quick details.',
     features: ['DIMS & MedEx search', 'Brand alternatives', 'Fast results'],
     screenshots: [
       './screenshots/medfinder/splash.jpg',
@@ -122,7 +122,7 @@ export const projects = [
     screenshot: './screenshots/football-ai.jpg',
     url: 'https://github.com/Shimulraj0/Football-AI',
     description:
-      'A full club-management platform for football academies â€” age groups, tryouts, curriculum engine, coach AI assistant, attendance, billing, and analytics dashboards.',
+      'A full club-management platform for football academies - age groups, tryouts, curriculum engine, coach AI assistant, attendance, billing, and analytics dashboards.',
     features: ['Club Command Center', 'AI assistant & analytics', 'Tryout scoring & placement'],
     screenshots: [
       './screenshots/football-ai/welcome.jpg',
@@ -158,7 +158,7 @@ export const projects = [
     screenshot: './screenshots/gran-guide.jpg',
     url: 'https://github.com/Shimulraj0/Gran-Guide-App',
     description:
-      'Digital safety and education app for seniors â€” guides on staying safe on Facebook & WhatsApp, call blocking, FAQ, and subscription-based protection plans.',
+      'Digital safety and education app for seniors - guides on staying safe on Facebook & WhatsApp, call blocking, FAQ, and subscription-based protection plans.',
     features: ['Online safety guides', 'Call protection', 'Subscription plans'],
     screenshots: [
       './screenshots/gran-guide/welcome.jpg',
@@ -210,7 +210,7 @@ export const projects = [
     screenshot: './screenshots/bluetooth.jpg',
     url: 'https://github.com/Shimulraj0/Bluetooth-Media-Player',
     description:
-      'A wearable prototype media player that connects to Bluetooth devices â€” device pairing, playback control, and settings tuned for small screens.',
+      'A wearable prototype media player that connects to Bluetooth devices - device pairing, playback control, and settings tuned for small screens.',
     features: ['Bluetooth device connection', 'Media playback control', 'Wearable-first UI'],
     screenshots: [
       './screenshots/bluetooth/bluetooth.jpg',
