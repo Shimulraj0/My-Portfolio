@@ -205,10 +205,10 @@ function Hero() {
             className="mt-6 text-4xl font-extrabold leading-tight tracking-tight text-zinc-900 sm:text-5xl lg:text-6xl dark:text-white"
           >
             Hi, I&apos;m{' '}
-            <span className="inline-block bg-gradient-to-r from-terracotta-600 via-accent to-teal bg-clip-text text-transparent dark:from-terracotta-400 dark:via-cream dark:to-terracotta-300">
+            <span className="inline-block text-terracotta-600 dark:text-terracotta-400">
               {NAME.split('').map((c, i) => (
                 <span key={i} className="inline-block overflow-hidden align-bottom">
-                  <span className="name-char inline-block will-change-transform">
+                  <span className="name-char inline-block">
                     {c === ' ' ? '\u00A0' : c}
                   </span>
                 </span>
