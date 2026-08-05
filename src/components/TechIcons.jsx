@@ -24,6 +24,9 @@ import {
   Gem,
   Hexagon,
   Braces,
+  ScanEye,
+  AppWindow,
+  Gauge,
 } from 'lucide-react'
 
 function BrandIcon({ d, size = 18, className = '' }) {
@@ -100,6 +103,9 @@ const GENERICS = {
   mvvm: { Icon: Layers, color: 'text-accent', label: 'MVVM & Provider' },
   llm: { Icon: BrainCircuit, color: 'text-accent', label: 'LLMs' },
   langgraph: { Icon: Network, color: 'text-terracotta-500', label: 'LangGraph' },
+  vision: { Icon: ScanEye, color: 'text-accent', label: 'Computer Vision' },
+  aiapps: { Icon: AppWindow, color: 'text-terracotta-500', label: 'AI Apps' },
+  system: { Icon: Gauge, color: 'text-teal', label: 'System Management' },
   automation: { Icon: Bot, color: 'text-accent', label: 'AI Automation' },
   n8n: { Icon: Workflow, color: 'text-pink-500', label: 'n8n' },
   voice: { Icon: Mic, color: 'text-terracotta-500', label: 'Voice AI' },
@@ -130,6 +136,9 @@ const RULES = [
   ['firebase', 'firebase'],
   ['openai', 'openai'],
   ['langgraph', 'langgraph'],
+  ['computer vision', 'vision'],
+  ['ai apps', 'aiapps'],
+  ['system management', 'system'],
   ['llm', 'llm'],
   ['automation', 'automation'],
   ['n8n', 'n8n'],

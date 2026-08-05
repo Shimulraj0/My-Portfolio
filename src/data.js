@@ -44,7 +44,7 @@ export const skills = [
   {
     group: 'AI & Language Models',
     icon: 'brain',
-    items: ['OpenAI GPT API', 'LLM Applications', 'LangGraph', 'AI Automation', 'n8n Workflows', 'AI Voice Apps', 'Bengali–English Translation'],
+    items: ['OpenAI GPT API', 'LLM Applications', 'LangGraph', 'AI Automation', 'n8n Workflows', 'Computer Vision', 'AI Apps', 'AI Voice Apps', 'Bengali–English Translation'],
   },
   {
     group: 'Web & Frontend',
@@ -64,7 +64,7 @@ export const skills = [
   {
     group: 'Tools & Platforms',
     icon: 'wrench',
-    items: ['Android Studio', 'VS Code', 'Git & GitHub', 'GitHub Pages', 'macOS', 'Windows', 'IT Support & Hardware'],
+    items: ['Android Studio', 'VS Code', 'Git & GitHub', 'GitHub Pages', 'macOS', 'Windows', 'System Management', 'IT Support & Hardware'],
   },
 ]
 

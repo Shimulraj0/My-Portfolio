@@ -177,7 +177,7 @@ function Hero() {
       </div>
 
       <div className="relative mx-auto grid w-full max-w-6xl items-center gap-12 px-6 md:grid-cols-[1.2fr_1fr] lg:gap-16">
-        <motion.div variants={container} initial="hidden" animate="show" className="text-center md:text-left">
+        <motion.div variants={container} initial="hidden" animate="show" className="order-last text-center md:order-none md:text-left">
           <motion.span
             variants={item}
             className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white/70 px-4 py-1.5 font-mono text-xs font-semibold text-zinc-600 backdrop-blur dark:border-zinc-700/70 dark:bg-zinc-900/70 dark:text-zinc-300"
@@ -312,7 +312,7 @@ function Hero() {
           initial={{ opacity: 0, scale: 0.94 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
-          className="mx-auto hidden sm:block"
+          className="order-first mx-auto md:order-none"
         >
           <Tilt max={12} className="mx-auto">
             <div className="relative">
@@ -329,7 +329,7 @@ function Hero() {
                 alt="Shimul Raj Das"
                 fetchPriority="high"
                 decoding="async"
-                className="relative aspect-square w-64 rounded-[2rem] border-4 border-white object-cover shadow-2xl sm:w-80"
+                className="relative aspect-square w-44 rounded-[2rem] border-4 border-white object-cover shadow-2xl sm:w-64 lg:w-80"
               />
 
               {chips.map((chip) => (
