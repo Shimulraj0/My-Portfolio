@@ -259,10 +259,59 @@ section[id] {
   .shimmer { animation: none; }
   .cursor-glow { display: none !important; }
   .spotlight-card::after { display: none; }
+  .term-caret, .dot-ping { animation: none; }
+}
+
+/* Terminal accents (Claude Code style) */
+@keyframes term-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+.term-caret {
+  animation: term-blink 1.1s steps(1) infinite;
+}
+@keyframes dot-ping {
+  75%, 100% { transform: scale(2.4); opacity: 0; }
+}
+.dot-ping {
+  animation: dot-ping 1.6s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
 
 @media (max-width: 640px) {
   section[id] {
     scroll-margin-top: 4rem;
   }
+}
+
+/* Lenis smooth scroll */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* Tech marquee */
+@keyframes marquee-x {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-x 36s linear infinite;
+  will-change: transform;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
 }

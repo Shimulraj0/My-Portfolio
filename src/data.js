@@ -39,22 +39,32 @@ export const skills = [
   {
     group: 'Mobile & App Development',
     icon: 'smartphone',
-    items: ['Flutter', 'Dart', 'Firebase', 'FlutterFlow', 'REST APIs', 'MVVM & Provider'],
+    items: ['Flutter', 'Dart', 'Firebase', 'FlutterFlow', 'MVVM & Provider'],
   },
   {
     group: 'AI & Language Models',
     icon: 'brain',
-    items: ['OpenAI GPT API', 'LLM Applications', 'AI Automation', 'n8n Workflows', 'AI Voice Apps', 'Bengali–English Translation'],
+    items: ['OpenAI GPT API', 'LLM Applications', 'LangGraph', 'AI Automation', 'n8n Workflows', 'AI Voice Apps', 'Bengali–English Translation'],
+  },
+  {
+    group: 'Web & Frontend',
+    icon: 'globe',
+    items: ['React', 'Vue.js', 'Vite', 'Tailwind CSS', 'GSAP', 'Framer Motion'],
+  },
+  {
+    group: 'Backend & APIs',
+    icon: 'server',
+    items: ['REST APIs', 'Supabase', 'Cloudflare Workers', 'Gemini API', 'Node.js'],
   },
   {
     group: 'Programming & Systems',
     icon: 'terminal',
-    items: ['Java', 'C', 'Bash', 'Android SDK', 'AOSP ROM Flashing', 'Bootloaders & Recoveries'],
+    items: ['Java', 'C', 'Python', 'Bash', 'Android SDK', 'AOSP ROM Flashing', 'Bootloaders & Recoveries'],
   },
   {
     group: 'Tools & Platforms',
     icon: 'wrench',
-    items: ['Android Studio', 'VS Code', 'Git & GitHub', 'macOS', 'Windows', 'IT Support & Hardware'],
+    items: ['Android Studio', 'VS Code', 'Git & GitHub', 'GitHub Pages', 'macOS', 'Windows', 'IT Support & Hardware'],
   },
 ]
 

@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
-import { Smartphone, Brain, Terminal, Wrench } from 'lucide-react'
+import { Smartphone, Brain, Terminal, Wrench, Globe, Server } from 'lucide-react'
 import { skills } from '../data.js'
 import { TechIcon } from './TechIcons.jsx'
 import { useSpotlight } from '../hooks/useSpotlight.js'
@@ -12,6 +12,8 @@ gsap.registerPlugin(ScrollTrigger)
 const iconMap = {
   smartphone: Smartphone,
   brain: Brain,
+  globe: Globe,
+  server: Server,
   terminal: Terminal,
   wrench: Wrench,
 }
@@ -19,6 +21,8 @@ const iconMap = {
 const colors = {
   smartphone: 'from-sky-500 to-sky-600',
   brain: 'from-terracotta-500 to-terracotta-600',
+  globe: 'from-accent to-accent-light',
+  server: 'from-teal to-navy',
   terminal: 'from-navy to-teal',
   wrench: 'from-accent to-accent-light',
 }

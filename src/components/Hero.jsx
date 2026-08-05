@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
-import { ArrowRight, Download, MapPin, Sparkles, Zap, Rocket, Globe } from 'lucide-react'
+import { motion, animate } from 'framer-motion'
+import { ArrowRight, Download, MapPin, Zap, Rocket, Globe } from 'lucide-react'
 import { profile } from '../data.js'
 import { GithubIcon, LinkedinIcon } from './BrandIcons.jsx'
 import { TechIcon } from './TechIcons.jsx'
@@ -25,6 +25,47 @@ const item = {
 
 const press = { whileTap: { scale: 0.96 }, whileHover: { scale: 1.03 } }
 
+const NAME = 'Shimul Raj Das'
+
+function CountUp({ to, suffix = '' }) {
+  const ref = useRef(null)
+  const [val, setVal] = useState(0)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return undefined
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setVal(to)
+      return undefined
+    }
+    let controls = null
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return
+        observer.disconnect()
+        controls = animate(0, to, {
+          duration: 1.4,
+          ease: [0.16, 1, 0.3, 1],
+          onUpdate: (v) => setVal(Math.round(v)),
+        })
+      },
+      { threshold: 0 }
+    )
+    observer.observe(el)
+    return () => {
+      observer.disconnect()
+      controls?.stop()
+    }
+  }, [to])
+
+  return (
+    <span ref={ref}>
+      {val}
+      {suffix}
+    </span>
+  )
+}
+
 const chips = [
   { name: 'Flutter', pos: '-left-4 top-8 sm:-left-8', delay: '0s' },
   { name: 'OpenAI', pos: '-right-3 top-1/3 sm:-right-7', delay: '1.5s' },
@@ -33,6 +74,7 @@ const chips = [
 
 function Hero() {
   const ref = useRef(null)
+  const nameRef = useRef(null)
   const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 })
 
   useEffect(() => {
@@ -62,6 +104,19 @@ function Hero() {
     return () => {
       ScrollTrigger.getAll().forEach(st => st.kill())
     }
+  }, [])
+
+  useEffect(() => {
+    const chars = nameRef.current?.querySelectorAll('.name-char')
+    if (!chars?.length) return undefined
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined
+
+    const tween = gsap.fromTo(
+      chars,
+      { yPercent: 120 },
+      { yPercent: 0, duration: 0.9, stagger: 0.03, ease: 'power4.out', delay: 0.45 }
+    )
+    return () => tween.kill()
   }, [])
 
   const onMove = (e) => {
@@ -125,19 +180,32 @@ function Hero() {
         <motion.div variants={container} initial="hidden" animate="show" className="text-center md:text-left">
           <motion.span
             variants={item}
-            className="inline-flex items-center gap-2 rounded-full border border-terracotta-200 bg-white/70 px-4 py-1.5 text-xs font-semibold text-terracotta-700 backdrop-blur dark:border-terracotta-500/40 dark:bg-zinc-900/70 dark:text-terracotta-300"
+            className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white/70 px-4 py-1.5 font-mono text-xs font-semibold text-zinc-600 backdrop-blur dark:border-zinc-700/70 dark:bg-zinc-900/70 dark:text-zinc-300"
           >
-            <Sparkles size={14} className="animate-pulse" />
-            Flutter Dev A AI & LLM Explorer A Android Tweaker
+            <span className="relative flex h-2 w-2">
+              <span className="dot-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+            </span>
+            <span className="text-zinc-400 dark:text-zinc-500">~/shimul</span>
+            <span className="text-terracotta-500 dark:text-terracotta-400">$</span>
+            flutter dev · ai &amp; llm · android
+            <span className="term-caret inline-block h-3.5 w-1.5 bg-terracotta-500" />
           </motion.span>
 
           <motion.h1
+            ref={nameRef}
             variants={item}
             className="mt-6 text-4xl font-extrabold leading-tight tracking-tight text-zinc-900 sm:text-5xl lg:text-6xl dark:text-white"
           >
             Hi, I&apos;m{' '}
-            <span className="bg-gradient-to-r from-terracotta-600 via-accent to-teal bg-clip-text text-transparent dark:from-terracotta-400 dark:via-cream dark:to-terracotta-300">
-              Shimul Raj Das
+            <span className="inline-block bg-gradient-to-r from-terracotta-600 via-accent to-teal bg-clip-text text-transparent dark:from-terracotta-400 dark:via-cream dark:to-terracotta-300">
+              {NAME.split('').map((c, i) => (
+                <span key={i} className="inline-block overflow-hidden align-bottom">
+                  <span className="name-char inline-block will-change-transform">
+                    {c === ' ' ? '\u00A0' : c}
+                  </span>
+                </span>
+              ))}
             </span>
           </motion.h1>
 
@@ -219,9 +287,9 @@ function Hero() {
             className="mt-10 flex items-center justify-center gap-8 md:justify-start"
           >
             {[
-              { value: '8+', label: 'Projects', icon: <Globe size={18} /> },
-              { value: '2', label: 'Years Exp', icon: <Zap size={18} /> },
-              { value: '4', label: 'Tech Stacks', icon: <Rocket size={18} /> },
+              { value: 8, suffix: '+', label: 'Projects', icon: <Globe size={18} /> },
+              { value: 2, suffix: '', label: 'Years Exp', icon: <Zap size={18} /> },
+              { value: 4, suffix: '', label: 'Tech Stacks', icon: <Rocket size={18} /> },
             ].map((stat, i) => (
               <motion.div
                 key={stat.label}
@@ -231,7 +299,9 @@ function Hero() {
                 className="glass-strong flex flex-col items-center gap-1 rounded-2xl border border-white/50 px-4 py-2 backdrop-blur-md"
               >
                 <span className="text-terracotta-600 dark:text-terracotta-400">{stat.icon}</span>
-                <span className="text-lg font-bold text-zinc-900 dark:text-white">{stat.value}</span>
+                <span className="text-lg font-bold text-zinc-900 dark:text-white">
+                  <CountUp to={stat.value} suffix={stat.suffix} />
+                </span>
                 <span className="text-[10px] font-medium text-zinc-500 dark:text-zinc-400">{stat.label}</span>
               </motion.div>
             ))}
@@ -279,7 +349,7 @@ function Hero() {
               <div className="absolute -bottom-5 left-1/2 z-20 -translate-x-1/2 rounded-2xl border border-terracotta-100 bg-white px-5 py-2.5 text-center shadow-xl dark:border-zinc-700 dark:bg-zinc-900">
                 <p className="flex items-center gap-2 font-mono text-xs font-semibold text-terracotta-700 dark:text-terracotta-300">
                   <TechIcon name="Flutter" size={13} />
-                  Flutter A AI A Android
+                  Flutter · AI · Android
                 </p>
               </div>
             </div>

@@ -16,14 +16,25 @@ const press = { whileTap: { scale: 0.94 } }
 
 function Navbar() {
   const [scrolled, setScrolled] = useState(false)
+  const [hidden, setHidden] = useState(false)
   const [open, setOpen] = useState(false)
   const { dark, toggle } = useTheme()
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20)
-    window.addEventListener('scroll', onScroll)
+    let lastY = window.scrollY
+    const onScroll = () => {
+      const y = window.scrollY
+      setScrolled(y > 20)
+      setHidden(!open && y > lastY && y > 240)
+      lastY = y
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+  }, [open])
+
+  useEffect(() => {
+    if (open) setHidden(false)
+  }, [open])
 
   return (
     <header
@@ -31,7 +42,7 @@ function Navbar() {
         scrolled
           ? 'border-b border-white/60 bg-white/70 shadow-lg shadow-zinc-900/5 backdrop-blur-xl backdrop-saturate-150 dark:border-zinc-800/80 dark:bg-zinc-950/70 dark:shadow-black/30'
           : 'bg-transparent'
-      }`}
+      } ${hidden ? '-translate-y-full' : 'translate-y-0'}`}
     >
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-terracotta-500/40 to-transparent" />
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">

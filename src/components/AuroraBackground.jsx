@@ -10,6 +10,7 @@ void main() {
 const FRAG = `
 precision highp float;
 uniform vec2 u_resolution;
+uniform vec2 u_mouse;
 uniform float u_time;
 uniform vec3 u_a;
 uniform vec3 u_b;
@@ -43,7 +44,7 @@ float fbm(vec2 p) {
 
 void main() {
   vec2 uv = gl_FragCoord.xy / u_resolution.xy;
-  vec2 p = uv * 1.7;
+  vec2 p = (uv + (u_mouse - 0.5) * 0.08) * 1.7;
   float t = u_time * 0.05;
 
   float q = fbm(p + t);
@@ -128,6 +129,7 @@ function AuroraBackground() {
     gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0)
 
     const resLoc = gl.getUniformLocation(program, 'u_resolution')
+    const mouseLoc = gl.getUniformLocation(program, 'u_mouse')
     const timeLoc = gl.getUniformLocation(program, 'u_time')
     const aLoc = gl.getUniformLocation(program, 'u_a')
     const bLoc = gl.getUniformLocation(program, 'u_b')
@@ -161,11 +163,19 @@ function AuroraBackground() {
 
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
+    const mouse = { x: 0.5, y: 0.5 }
+    const onMouse = (e) => {
+      mouse.x = window.innerWidth > 0 ? e.clientX / window.innerWidth : 0.5
+      mouse.y = window.innerHeight > 0 ? e.clientY / window.innerHeight : 0.5
+    }
+    window.addEventListener('pointermove', onMouse, { passive: true })
+
     let raf = 0
     let running = false
 
     const render = () => {
       gl.uniform2f(resLoc, width, height)
+      gl.uniform2f(mouseLoc, mouse.x, mouse.y)
       gl.uniform1f(timeLoc, performance.now() / 1000)
       gl.drawArrays(gl.TRIANGLES, 0, 3)
     }
@@ -198,6 +208,7 @@ function AuroraBackground() {
 
     return () => {
       stop()
+      window.removeEventListener('pointermove', onMouse)
       document.removeEventListener('visibilitychange', onVisibility)
       window.removeEventListener('resize', resize)
       observer.disconnect()

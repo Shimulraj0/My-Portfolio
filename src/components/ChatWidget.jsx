@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Bot, MessageCircle, Send, X, Sparkles } from 'lucide-react'
+import { Terminal, MessageCircle, Send, X } from 'lucide-react'
 import { profile } from '../data.js'
 import { aiEnabled, getBotReply, suggestedQuestions } from '../chatbot.js'
 import { WhatsAppIcon } from './BrandIcons.jsx'
@@ -12,14 +12,26 @@ function ChatMessage({ message }) {
   return (
     <div className={`flex ${isBot ? 'justify-start' : 'justify-end'}`}>
       <div
-        className={`max-w-[80%] whitespace-pre-wrap rounded-2xl px-3.5 py-2.5 text-[13px] leading-relaxed ${
-          isBot
-            ? 'rounded-tl-sm border border-zinc-100 bg-white text-zinc-700 dark:border-zinc-800 dark:bg-zinc-800 dark:text-zinc-200'
-            : 'rounded-tr-sm bg-terracotta-600 text-white'
+        className={`max-w-[85%] whitespace-pre-wrap leading-relaxed ${
+          isBot ? 'text-zinc-300' : 'text-right text-zinc-100'
         }`}
       >
+        <span
+          className={`mr-2 select-none font-bold ${isBot ? 'text-terracotta-400' : 'text-emerald-400'}`}
+        >
+          {isBot ? '▸' : '$'}
+        </span>
         {message.text}
       </div>
+    </div>
+  )
+}
+
+function TypingIndicator() {
+  return (
+    <div className="flex justify-start font-mono text-zinc-300">
+      <span className="mr-2 select-none text-terracotta-400">▸</span>
+      <span className="term-caret inline-block h-3.5 w-2 translate-y-0.5 bg-terracotta-400" />
     </div>
   )
 }
@@ -40,7 +52,7 @@ function ChatWidget() {
         setMessages([
           {
             role: 'bot',
-            text: `Hi there! 👋 I'm an AI assistant answering on behalf of ${profile.name}. Ask me anything about his skills, projects, or how to reach him.`,
+            text: `Hi there! I'm an AI assistant answering on behalf of ${profile.name}. Ask me anything about his skills, projects, or how to reach him.`,
           },
         ])
       }, 700)
@@ -82,95 +94,94 @@ function ChatWidget() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.25, ease: 'easeOut' }}
-            className="flex h-[26rem] w-[calc(100vw-2.5rem)] max-w-sm flex-col overflow-hidden rounded-3xl border border-zinc-100 bg-white shadow-2xl shadow-zinc-900/15 dark:border-zinc-800 dark:bg-zinc-900"
+            className="flex h-[26rem] w-[calc(100vw-2.5rem)] max-w-sm flex-col overflow-hidden rounded-2xl border border-zinc-700/60 bg-zinc-950 font-mono shadow-2xl shadow-black/50"
           >
-            <div className="flex items-center gap-3 border-b border-zinc-100 bg-gradient-to-r from-navy to-teal px-4 py-3.5 dark:border-zinc-800">
-              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/15 text-white">
-                <Bot size={18} />
-              </span>
-              <div className="min-w-0 flex-1">
-                <p className="text-sm font-bold text-white">Shimul&apos;s AI Assistant</p>
-                <p className="flex items-center gap-1 text-[11px] text-terracotta-100">
-                  {aiEnabled ? (
-                    <>
-                      <Sparkles size={11} />
-                      AI-powered · replies on his behalf
-                    </>
-                  ) : (
-                    <>Online · replies on his behalf</>
-                  )}
+            <div className="flex items-center gap-3 border-b border-zinc-800 bg-zinc-900/90 px-4 py-3">
+              <div className="flex shrink-0 gap-1.5" aria-hidden>
+                <span className="h-3 w-3 rounded-full bg-[#ff5f57]" />
+                <span className="h-3 w-3 rounded-full bg-[#febc2e]" />
+                <span className="h-3 w-3 rounded-full bg-[#28c840]" />
+              </div>
+              <div className="flex min-w-0 flex-1 items-center gap-2">
+                <Terminal size={13} className="shrink-0 text-terracotta-400" />
+                <p className="truncate text-xs font-semibold text-zinc-200">
+                  shimul-ai
+                  <span className="ml-2 hidden text-[10px] font-normal text-zinc-500 sm:inline">
+                    · {aiEnabled ? 'gemini worker' : 'offline'}
+                  </span>
                 </p>
               </div>
-              <motion.button
-                type="button"
-                {...press}
-                onClick={() => setOpen(false)}
-                aria-label="Close chat"
-                className="rounded-full p-1.5 text-white transition-colors hover:bg-white/15"
-              >
-                <X size={16} />
-              </motion.button>
+              <div className="flex shrink-0 items-center gap-2">
+                <span className="flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 text-[10px] font-medium text-emerald-400">
+                  <span className="relative flex h-1.5 w-1.5">
+                    <span className="dot-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400" />
+                    <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                  </span>
+                  online
+                </span>
+                <motion.button
+                  type="button"
+                  {...press}
+                  onClick={() => setOpen(false)}
+                  aria-label="Close chat"
+                  className="rounded-md p-1.5 text-zinc-400 transition-colors hover:bg-zinc-800 hover:text-white"
+                >
+                  <X size={15} />
+                </motion.button>
+              </div>
             </div>
 
-            <div ref={listRef} className="flex-1 space-y-3 overflow-y-auto bg-zinc-50/60 p-4 dark:bg-zinc-950/40">
+            <div ref={listRef} className="flex-1 space-y-4 overflow-y-auto bg-zinc-950 p-4 text-[13px]">
               {messages.map((m, i) => (
                 <ChatMessage key={i} message={m} />
               ))}
-              {typing && (
-                <div className="flex justify-start">
-                  <div className="rounded-2xl rounded-tl-sm border border-zinc-100 bg-white px-3.5 py-3 dark:border-zinc-800 dark:bg-zinc-800">
-                    <div className="flex gap-1">
-                      {[0, 1, 2].map((d) => (
-                        <motion.span
-                          key={d}
-                          animate={{ opacity: [0.3, 1, 0.3] }}
-                          transition={{ duration: 1, repeat: Infinity, delay: d * 0.2 }}
-                          className="h-1.5 w-1.5 rounded-full bg-terracotta-500"
-                        />
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              )}
+              {typing && <TypingIndicator />}
             </div>
 
             {messages.length <= 1 && (
-              <div className="flex flex-wrap gap-1.5 border-t border-zinc-100 bg-white px-3 py-2 dark:border-zinc-800 dark:bg-zinc-900">
-                {suggestedQuestions.map((q) => (
-                  <motion.button
-                    key={q}
-                    type="button"
-                    {...press}
-                    onClick={() => send(q)}
-                    className="rounded-full border border-terracotta-200 bg-terracotta-50 px-2.5 py-1 text-[11px] font-medium text-terracotta-700 dark:border-terracotta-500/40 dark:bg-terracotta-500/10 dark:text-terracotta-300"
-                  >
-                    {q}
-                  </motion.button>
-                ))}
+              <div className="border-t border-zinc-800 bg-zinc-900/60 px-3 py-2">
+                <p className="mb-1.5 select-none px-1 text-[10px] tracking-wide text-zinc-500">
+                  $ try one
+                </p>
+                <div className="flex flex-wrap gap-1.5">
+                  {suggestedQuestions.map((q) => (
+                    <motion.button
+                      key={q}
+                      type="button"
+                      {...press}
+                      onClick={() => send(q)}
+                      className="rounded-md border border-zinc-700/80 bg-zinc-900 px-2 py-1 text-[11px] text-zinc-400 transition-colors hover:border-terracotta-500/60 hover:text-terracotta-300"
+                    >
+                      $ {q}
+                    </motion.button>
+                  ))}
+                </div>
               </div>
             )}
 
             <form
-              className="flex items-center gap-2 border-t border-zinc-100 bg-white p-3 dark:border-zinc-800 dark:bg-zinc-900"
+              className="flex items-center gap-2 border-t border-zinc-800 bg-zinc-950 px-3 py-2.5"
               onSubmit={(e) => {
                 e.preventDefault()
                 send()
               }}
             >
+              <span className="select-none text-sm font-bold text-emerald-400">$</span>
               <input
                 ref={inputRef}
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Ask about his work..."
-                className="min-w-0 flex-1 rounded-xl border border-zinc-200 bg-zinc-50 px-3.5 py-2.5 text-sm text-zinc-800 outline-none transition-colors focus:border-terracotta-400 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100"
+                placeholder="ask about his work…"
+                aria-label="Ask the assistant"
+                className="min-w-0 flex-1 bg-transparent text-sm text-zinc-100 caret-terracotta-400 outline-none placeholder:text-zinc-600"
               />
               <motion.button
                 type="submit"
                 {...press}
                 aria-label="Send message"
-                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-terracotta-600 text-white transition-colors hover:bg-terracotta-700"
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-zinc-700 text-terracotta-400 transition-colors hover:border-terracotta-500 hover:bg-terracotta-500/10"
               >
-                <Send size={16} />
+                <Send size={15} />
               </motion.button>
             </form>
           </motion.div>
