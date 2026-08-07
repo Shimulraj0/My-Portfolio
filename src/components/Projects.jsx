@@ -4,6 +4,7 @@ import { ArrowUpRight, ChevronLeft, ChevronRight, X, Sparkles } from 'lucide-rea
 import { categories, projects } from '../data.js'
 import { GithubIcon } from './BrandIcons.jsx'
 import Tilt from './Tilt.jsx'
+import FluidBackground from './effects/FluidBackground.jsx'
 import { useSpotlight } from '../hooks/useSpotlight.js'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -135,11 +136,11 @@ function ProjectCard({ project }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-40px' }}
       transition={{ duration: 0.5, ease: 'easeOut' }}
-      className="spotlight-card glass group relative overflow-hidden rounded-3xl p-6 transition-all card-lift dark:border-zinc-800"
+      className="aura-hairline spotlight-card glass group relative overflow-hidden rounded-3xl p-6 transition-all card-lift dark:border-zinc-800"
     >
       <Tilt max={7} className="relative">
         <div className="absolute -top-1 -right-1 z-10">
-          <span className="inline-flex items-center gap-1 rounded-full bg-accent/10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-accent dark:bg-accent/20">
+          <span className="inline-flex items-center gap-1 rounded-full bg-aqua-500/10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-aqua-600 dark:bg-aqua-500/20 dark:text-aqua-400">
             <Sparkles size={10} />
             Featured
           </span>
@@ -164,7 +165,7 @@ function ProjectCard({ project }) {
           <div className="min-w-0 flex-1">
             <div className="flex items-center justify-between gap-2">
               <h3 className="text-lg font-bold text-zinc-900 dark:text-white">{project.title}</h3>
-              <span className="shrink-0 rounded-full bg-terracotta-50 px-2.5 py-0.5 text-xs font-semibold text-terracotta-700 dark:bg-terracotta-500/10 dark:text-terracotta-300">
+              <span className="shrink-0 rounded-full bg-aqua-50 px-2.5 py-0.5 text-xs font-semibold text-aqua-700 dark:bg-aqua-500/10 dark:text-aqua-300">
                 {project.tag}
               </span>
             </div>
@@ -189,7 +190,7 @@ function ProjectCard({ project }) {
                 rel="noreferrer"
                 {...press}
                 transition={{ type: 'spring', stiffness: 400, damping: 20 }}
-                className="inline-flex items-center gap-1.5 rounded-lg bg-terracotta-600 px-3.5 py-1.5 text-xs font-semibold text-white transition-all hover:bg-terracotta-700 hover:scale-105"
+                className="inline-flex items-center gap-1.5 rounded-lg bg-aqua-600 px-3.5 py-1.5 text-xs font-semibold text-white transition-all hover:bg-aqua-700 hover:scale-105"
               >
                 <GithubIcon size={14} />
                 Source
@@ -199,7 +200,7 @@ function ProjectCard({ project }) {
                 target="_blank"
                 rel="noreferrer"
                 {...press}
-                className="inline-flex items-center gap-1 text-xs font-semibold text-zinc-500 transition-colors hover:text-terracotta-700 dark:text-zinc-400 dark:hover:text-terracotta-400"
+                className="inline-flex items-center gap-1 text-xs font-semibold text-zinc-500 transition-colors hover:text-aqua-700 dark:text-zinc-400 dark:hover:text-aqua-400"
               >
                 View repo
                 <ArrowUpRight size={14} />
@@ -234,7 +235,9 @@ function Projects() {
       id="projects"
       className="relative overflow-hidden bg-gradient-to-b from-white via-cream to-white py-24 transition-colors duration-300 dark:from-zinc-950 dark:via-zinc-900/40 dark:to-zinc-950"
     >
-      <div className="mx-auto max-w-6xl px-6">
+      {/* WebGL fluid background (adapted from WebGL-Fluid-Simulation, MIT) */}
+      <FluidBackground variant="projects" />
+      <div className="relative mx-auto max-w-6xl px-6">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -242,7 +245,7 @@ function Projects() {
           transition={{ duration: 0.6, ease: 'easeOut' }}
           className="mb-12 text-center"
         >
-          <p className="font-mono text-sm font-semibold uppercase tracking-widest text-terracotta-600 dark:text-terracotta-400">
+          <p className="font-mono text-sm font-semibold uppercase tracking-widest text-aqua-600 dark:text-aqua-400">
             Projects
           </p>
           <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-zinc-900 sm:text-4xl dark:text-white">
@@ -271,8 +274,8 @@ function Projects() {
               whileTap={{ scale: 0.92 }}
               className={`rounded-full px-4 py-2 text-sm font-semibold transition-all ${
                 active === cat.id
-                  ? 'bg-terracotta-600 text-white shadow-lg shadow-terracotta-600/25'
-                  : 'border border-zinc-200 bg-white text-zinc-600 hover:border-terracotta-300 hover:text-terracotta-700 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:border-terracotta-500 dark:hover:text-terracotta-400'
+                  ? 'bg-aqua-600 text-white shadow-lg shadow-aqua-600/25'
+                  : 'border border-zinc-200 bg-white text-zinc-600 hover:border-aqua-300 hover:text-aqua-700 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:border-aqua-500 dark:hover:text-aqua-400'
               }`}
             >
               {cat.label}

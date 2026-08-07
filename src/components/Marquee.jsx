@@ -1,5 +1,6 @@
 import { skills } from '../data.js'
 import { TechIcon } from './TechIcons.jsx'
+import FluidBackground from './effects/FluidBackground.jsx'
 
 const ITEMS = skills.flatMap((group) => group.items)
 
@@ -13,7 +14,7 @@ function Row({ ariaHidden }) {
         >
           <TechIcon name={item} size={16} />
           {item}
-          <span className="ml-10 text-terracotta-400 dark:text-terracotta-500">✦</span>
+          <span className="ml-10 text-aqua-500 dark:text-aqua-400">✦</span>
         </span>
       ))}
     </div>
@@ -23,7 +24,9 @@ function Row({ ariaHidden }) {
 function Marquee() {
   return (
     <div className="marquee relative overflow-hidden border-y border-zinc-200/70 bg-white/40 py-4 backdrop-blur-sm dark:border-zinc-800/80 dark:bg-zinc-900/40">
-      <div className="marquee-track">
+      {/* WebGL fluid background (adapted from WebGL-Fluid-Simulation, MIT) */}
+      <FluidBackground variant="marquee" />
+      <div className="marquee-track relative">
         <Row ariaHidden={false} />
         <Row ariaHidden={true} />
       </div>

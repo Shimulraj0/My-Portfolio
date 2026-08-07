@@ -1,6 +1,8 @@
 import { profile, skills, projects } from './data.js'
 
-const PROXY_URL = import.meta.env.VITE_AI_PROXY_URL
+// In dev, use the relative /chat path so Vite's proxy forwards it same-origin (no CORS).
+// In production, use the configured worker URL.
+const PROXY_URL = import.meta.env.DEV ? '/chat' : import.meta.env.VITE_AI_PROXY_URL
 
 const lower = (s) => s.toLowerCase()
 

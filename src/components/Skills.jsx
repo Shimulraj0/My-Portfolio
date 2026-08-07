@@ -6,6 +6,8 @@ import { TechIcon } from './TechIcons.jsx'
 import { useSpotlight } from '../hooks/useSpotlight.js'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import HorizonGrid from './effects/HorizonGrid.jsx'
+import FluidBackground from './effects/FluidBackground.jsx'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -20,11 +22,11 @@ const iconMap = {
 
 const colors = {
   smartphone: 'from-sky-500 to-sky-600',
-  brain: 'from-terracotta-500 to-terracotta-600',
-  globe: 'from-accent to-accent-light',
-  server: 'from-teal to-navy',
-  terminal: 'from-navy to-teal',
-  wrench: 'from-accent to-accent-light',
+  brain: 'from-aqua-500 to-aqua-600',
+  globe: 'from-aqua-400 to-aqua-600',
+  server: 'from-slate-500 to-slate-800',
+  terminal: 'from-slate-800 to-slate-500',
+  wrench: 'from-aqua-400 to-aqua-600',
 }
 
 function SkillCard({ group, index }) {
@@ -75,13 +77,12 @@ function SkillCard({ group, index }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
       transition={{ duration: 0.6, delay: index * 0.08, ease: 'easeOut' }}
-      className="spotlight-card glass relative overflow-hidden rounded-3xl p-5 transition-shadow hover:shadow-2xl hover:shadow-accent/10 dark:hover:shadow-accent/20 sm:p-6"
+      className="aura-hairline spotlight-card glass relative overflow-hidden rounded-3xl p-5 transition-shadow hover:shadow-2xl hover:shadow-aqua-500/10 dark:hover:shadow-aqua-500/20 sm:p-6"
     >
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-terracotta-400/40 to-transparent" />
       <div className="relative">
         <div className="mb-4 flex items-center gap-3">
           <span
-            className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br ${colors[group.icon] || 'from-terracotta-500 to-terracotta-600'} text-white shadow-lg`}
+            className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br ${colors[group.icon] || 'from-aqua-500 to-aqua-600'} text-white shadow-lg`}
           >
             <Icon size={22} />
           </span>
@@ -92,7 +93,7 @@ function SkillCard({ group, index }) {
           {group.items.map((item) => (
             <div
               key={item}
-              className="skill-tile group relative flex min-h-[4.5rem] cursor-default flex-col items-center justify-center gap-1.5 rounded-2xl border border-white/60 bg-white/70 px-2 py-3 text-center shadow-sm transition-all duration-300 hover:border-terracotta-300/70 hover:shadow-xl hover:shadow-terracotta-500/10 dark:border-white/10 dark:bg-zinc-800/70 dark:hover:border-accent/40 dark:hover:shadow-accent/20"
+              className="skill-tile group relative flex min-h-[4.5rem] cursor-default flex-col items-center justify-center gap-1.5 rounded-2xl border border-white/60 bg-white/70 px-2 py-3 text-center shadow-sm transition-all duration-300 hover:border-aqua-300/70 hover:shadow-xl hover:shadow-aqua-500/10 dark:border-white/10 dark:bg-zinc-800/70 dark:hover:border-aqua-500/40 dark:hover:shadow-aqua-500/20"
               style={{ transformStyle: 'preserve-3d' }}
             >
               <span className="transition-transform duration-300 group-hover:-translate-y-1">
@@ -115,13 +116,16 @@ function Skills() {
       id="skills"
       className="relative overflow-hidden bg-gradient-to-b from-cream via-white to-white py-24 transition-colors duration-300 dark:from-zinc-900/60 dark:via-zinc-950 dark:to-zinc-950"
     >
+      <HorizonGrid />
+      {/* WebGL fluid background (adapted from WebGL-Fluid-Simulation, MIT) */}
+      <FluidBackground variant="skills" />
       <div
         aria-hidden
-        className="pointer-events-none absolute -right-32 top-24 h-80 w-80 rounded-full bg-accent/10 blur-3xl"
+        className="pointer-events-none absolute -right-32 top-24 h-80 w-80 rounded-full bg-aqua-500/10 blur-3xl"
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute -left-32 bottom-24 h-80 w-80 rounded-full bg-terracotta-500/10 blur-3xl"
+        className="pointer-events-none absolute -left-32 bottom-24 h-80 w-80 rounded-full bg-aqua-500/10 blur-3xl"
       />
 
       <div className="relative mx-auto max-w-6xl px-6">
@@ -132,7 +136,7 @@ function Skills() {
           transition={{ duration: 0.6, ease: 'easeOut' }}
           className="mb-14 text-center"
         >
-          <p className="font-mono text-sm font-semibold uppercase tracking-widest text-terracotta-600 dark:text-terracotta-400">
+          <p className="font-mono text-sm font-semibold uppercase tracking-widest text-aqua-600 dark:text-aqua-400">
             Tech Stack
           </p>
           <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-zinc-900 sm:text-4xl dark:text-white">

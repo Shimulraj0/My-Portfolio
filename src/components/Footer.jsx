@@ -9,7 +9,7 @@ function Footer() {
   return (
     <footer className="border-t border-zinc-800 bg-zinc-950 py-10">
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 px-6 sm:flex-row">
-        <p className="font-mono text-sm font-semibold text-terracotta-400">&lt;shimulraj0 /&gt;</p>
+        <p className="font-mono text-sm font-semibold text-aqua-500">&lt;shimulraj0 /&gt;</p>
 
         <p className="text-sm text-zinc-400">
           © {new Date().getFullYear()} {profile.name}. Crafted with React, Tailwind & Flutter

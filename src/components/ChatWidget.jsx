@@ -17,7 +17,7 @@ function ChatMessage({ message }) {
         }`}
       >
         <span
-          className={`mr-2 select-none font-bold ${isBot ? 'text-terracotta-400' : 'text-emerald-400'}`}
+          className={`mr-2 select-none font-bold ${isBot ? 'text-aqua-400' : 'text-emerald-400'}`}
         >
           {isBot ? '▸' : '$'}
         </span>
@@ -30,8 +30,8 @@ function ChatMessage({ message }) {
 function TypingIndicator() {
   return (
     <div className="flex justify-start font-mono text-zinc-300">
-      <span className="mr-2 select-none text-terracotta-400">▸</span>
-      <span className="term-caret inline-block h-3.5 w-2 translate-y-0.5 bg-terracotta-400" />
+      <span className="mr-2 select-none text-aqua-400">▸</span>
+      <span className="term-caret inline-block h-3.5 w-2 translate-y-0.5 bg-aqua-400" />
     </div>
   )
 }
@@ -103,7 +103,7 @@ function ChatWidget() {
                 <span className="h-3 w-3 rounded-full bg-[#28c840]" />
               </div>
               <div className="flex min-w-0 flex-1 items-center gap-2">
-                <Terminal size={13} className="shrink-0 text-terracotta-400" />
+                <Terminal size={13} className="shrink-0 text-aqua-400" />
                 <p className="truncate text-xs font-semibold text-zinc-200">
                   shimul-ai
                   <span className="ml-2 hidden text-[10px] font-normal text-zinc-500 sm:inline">
@@ -150,7 +150,7 @@ function ChatWidget() {
                       type="button"
                       {...press}
                       onClick={() => send(q)}
-                      className="rounded-md border border-zinc-700/80 bg-zinc-900 px-2 py-1 text-[11px] text-zinc-400 transition-colors hover:border-terracotta-500/60 hover:text-terracotta-300"
+                      className="rounded-md border border-zinc-700/80 bg-zinc-900 px-2 py-1 text-[11px] text-zinc-400 transition-colors hover:border-aqua-500/60 hover:text-aqua-300"
                     >
                       $ {q}
                     </motion.button>
@@ -173,13 +173,13 @@ function ChatWidget() {
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="ask about his work…"
                 aria-label="Ask the assistant"
-                className="min-w-0 flex-1 bg-transparent text-sm text-zinc-100 caret-terracotta-400 outline-none placeholder:text-zinc-600"
+                className="min-w-0 flex-1 bg-transparent text-sm text-zinc-100 caret-aqua-400 outline-none placeholder:text-zinc-600"
               />
               <motion.button
                 type="submit"
                 {...press}
                 aria-label="Send message"
-                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-zinc-700 text-terracotta-400 transition-colors hover:border-terracotta-500 hover:bg-terracotta-500/10"
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-zinc-700 text-aqua-400 transition-colors hover:border-aqua-500 hover:bg-aqua-500/10"
               >
                 <Send size={15} />
               </motion.button>
@@ -204,7 +204,7 @@ function ChatWidget() {
           {...press}
           onClick={() => setOpen((v) => !v)}
           aria-label={open ? 'Close chat' : 'Open chat'}
-          className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-terracotta-500 to-navy text-white shadow-xl shadow-terracotta-600/40"
+          className="aura-spin-border flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-aqua-500 to-slate-900 text-white shadow-xl shadow-aqua-600/40"
         >
           {open ? <X size={24} /> : <MessageCircle size={24} />}
         </motion.button>

@@ -1,7 +1,12 @@
 export const profile = {
   name: 'Shimul Raj Das',
-  role: 'Flutter Developer',
-  tagline: ['Flutter Developer', 'AI & LLM Explorer', 'Android Tweaker', 'macOS Installer', 'Tech Enthusiast'],
+  role: 'App Engineer & AI Explorer',
+  tagline: [
+    'App Engineer & AI Explorer',
+    'More than a Flutter developer',
+    'Android · AOSP · Hackintosh',
+    'LLM-powered app builder',
+  ],
   location: 'Dhaka, Bangladesh',
   email: 'shimulrajdas001@gmail.com',
   phone: '+8801575204054',
@@ -29,9 +34,9 @@ export const profile = {
     },
   ],
   about: [
-    'I am a Flutter developer who loves turning ideas into polished mobile apps. Right now I am building a voice-controlled AI app and exploring LLMs for Bengali-English translation.',
-    'Beyond code, I am an Android enthusiast - flashing AOSP ROMs, recoveries, and bootloaders - and I built my own Hackintosh (macOS on PC) for the fun of it.',
-    'I enjoy IT support, hardware troubleshooting, and learning cross-platform development and smart automation.',
+    'People call me a Flutter developer — and sure, I ship Flutter apps. But that is one tool in the box. I build with React too, wire LLMs into real products, and keep chasing whatever breaks my brain next.',
+    'Beyond the code, I am a systems tinkerer — flashing AOSP ROMs, recoveries and bootloaders on Android — and I built a Hackintosh (macOS on a PC) just because I could.',
+    'IT support, hardware troubleshooting, cross-platform dev, smart automation: if it runs, I want to know how it works.',
   ],
 }
 

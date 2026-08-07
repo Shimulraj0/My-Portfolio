@@ -1,5 +1,12 @@
 const MODEL = 'gemini-3.5-flash'
-const ALLOWED_ORIGINS = ['https://shimulraj0.github.io', 'https://shimul.is-a.dev']
+// Localhost entries keep the dev server (vite:5173) and Docker preview working
+const ALLOWED_ORIGINS = [
+  'https://shimulraj0.github.io',
+  'https://shimul.is-a.dev',
+  'http://localhost:5173',
+  'http://127.0.0.1:5173',
+  'http://localhost:8080',
+]
 const KV_KEY = 'visits'
 
 const SYSTEM_PROMPT = `
@@ -21,13 +28,19 @@ FACTS:
 `
 
 function cors(origin) {
-  const allow = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0]
-  return {
-    'Access-Control-Allow-Origin': allow,
+  // Only echo the origin when it is explicitly allowed. When the origin is
+  // absent (curl, same-origin) or unknown (a random site), we omit the header
+  // so the browser enforces the deny instead of a confusing fallback echo.
+  const headers = {
     'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type',
     'Access-Control-Max-Age': '86400',
+    'Vary': 'Origin',
   }
+  if (origin && ALLOWED_ORIGINS.includes(origin)) {
+    headers['Access-Control-Allow-Origin'] = origin
+  }
+  return headers
 }
 
 async function getVisits(env) {

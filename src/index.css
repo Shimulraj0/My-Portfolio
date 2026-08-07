@@ -3,28 +3,28 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --font-sans: "Manrope", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --font-display: "Space Grotesk", "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Sora", "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
 
-  --color-cream: #fdf6ec;
-  --color-navy: #1d3557;
-  --color-teal: #264653;
-  --color-muted: #8a8a8a;
+  --color-cream: #f6f7f9;
+  --color-muted: #7d8b9a;
 
-  --color-terracotta-50: #fdf5f0;
-  --color-terracotta-100: #fcede6;
-  --color-terracotta-200: #f9dcd0;
-  --color-terracotta-300: #f4c0ae;
-  --color-terracotta-400: #ee9b82;
-  --color-terracotta-500: #e98065;
-  --color-terracotta-600: #e76f51;
-  --color-terracotta-700: #ce5a3c;
-  --color-terracotta-800: #a8462f;
+  --color-slate-950: #060a11;
+  --color-slate-900: #0b1220;
+  --color-slate-800: #141d2f;
+  --color-ink: #e7edf3;
 
-  --color-accent: #7c3aed;
-  --color-accent-light: #a78bfa;
-  --color-accent-dark: #5b21b6;
+  --color-aqua-50: #ecfeff;
+  --color-aqua-100: #cffafe;
+  --color-aqua-200: #a5f3fc;
+  --color-aqua-300: #67e8f9;
+  --color-aqua-400: #22d3ee;
+  --color-aqua-500: #06b6d4;
+  --color-aqua-600: #0891b2;
+  --color-aqua-700: #0e7490;
+  --color-aqua-800: #155e75;
+  --color-aqua-900: #164e63;
 }
 
 html {
@@ -36,6 +36,29 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  background-color: var(--color-cream);
+  color: var(--color-slate-900);
+}
+.dark body {
+  background-color: var(--color-slate-950);
+  color: var(--color-ink);
+}
+
+/* Global grain overlay — fixed, behind content, low opacity */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-image: url("/textures/grain.svg");
+  background-size: 240px 240px;
+  background-repeat: repeat;
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+}
+html:not(.dark) body::before {
+  opacity: 0.04;
 }
 
 h1,
@@ -88,7 +111,7 @@ section[id] {
 
 .gradient-border {
   position: relative;
-  background: var(--bg, #fdf6ec);
+  background: var(--bg, #f6f7f9);
   border-radius: 1rem;
 }
 .gradient-border::before {
@@ -105,7 +128,7 @@ section[id] {
 }
 
 .glow-accent {
-  box-shadow: 0 0 30px rgba(124, 58, 237, 0.15), 0 0 60px rgba(124, 58, 237, 0.05);
+  box-shadow: 0 0 30px rgba(6, 182, 212, 0.18), 0 0 60px rgba(6, 182, 212, 0.06);
 }
 
 .animated-underline {
@@ -119,7 +142,7 @@ section[id] {
   left: 0;
   width: 0;
   height: 3px;
-  background: linear-gradient(90deg, #7c3aed, #e76f51);
+  background: linear-gradient(90deg, #06b6d4, #67e8f9);
   border-radius: 2px;
   transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -136,8 +159,8 @@ section[id] {
 }
 
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 20px rgba(124, 58, 237, 0.2); }
-  50% { box-shadow: 0 0 40px rgba(124, 58, 237, 0.4); }
+  0%, 100% { box-shadow: 0 0 20px rgba(6, 182, 212, 0.22); }
+  50% { box-shadow: 0 0 40px rgba(6, 182, 212, 0.42); }
 }
 .pulse-glow {
   animation: pulse-glow 4s ease-in-out infinite;
@@ -148,7 +171,7 @@ section[id] {
   100% { background-position: 200% 0; }
 }
 .shimmer {
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  background: linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.12), transparent);
   background-size: 200% 100%;
   animation: shimmer 2s infinite;
 }
@@ -168,35 +191,49 @@ section[id] {
 .weavely-container {
   border-radius: 1rem;
   overflow: hidden;
-  border: 1px solid rgba(124, 58, 237, 0.2);
-  box-shadow: 0 0 30px rgba(124, 58, 237, 0.1);
+  border: 1px solid rgba(6, 182, 212, 0.22);
+  box-shadow: 0 0 30px rgba(6, 182, 212, 0.12);
 }
 
-/* ---- Glassmorphism system (color theory: warm terracotta primary + violet accent over cream/near-black) ---- */
+/* ---- Glassmorphism system (obsidian base + aqua hairline) ---- */
 .glass {
-  background: rgba(255, 255, 255, 0.55);
-  border: 1px solid rgba(255, 255, 255, 0.65);
+  background: rgba(6, 10, 17, 0.55);
+  border: 1px solid rgba(6, 182, 212, 0.18);
   backdrop-filter: blur(16px) saturate(160%);
   -webkit-backdrop-filter: blur(16px) saturate(160%);
-  box-shadow: 0 8px 32px rgba(29, 53, 87, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.6);
-}
-.dark .glass {
-  background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(255, 255, 255, 0.09);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 .glass-strong {
-  background: rgba(255, 255, 255, 0.78);
-  border-color: rgba(255, 255, 255, 0.9);
+  background: rgba(6, 10, 17, 0.75);
+  border-color: rgba(6, 182, 212, 0.28);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
-.dark .glass-strong {
-  background: rgba(24, 24, 27, 0.72);
-  border-color: rgba(255, 255, 255, 0.1);
+html:not(.dark) .glass {
+  background: rgba(255, 255, 255, 0.6);
+  border-color: rgba(6, 182, 212, 0.22);
+  box-shadow: 0 8px 32px rgba(10, 24, 47, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+html:not(.dark) .glass-strong {
+  background: rgba(255, 255, 255, 0.78);
+  border-color: rgba(6, 182, 212, 0.3);
+  box-shadow: 0 12px 40px rgba(10, 24, 47, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.7);
 }
 
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  .glass { background: rgba(255, 255, 255, 0.94); }
-  .dark .glass { background: rgba(24, 24, 27, 0.97); }
+  .glass { background: rgba(6, 10, 17, 0.94); }
+  html:not(.dark) .glass { background: rgba(255, 255, 255, 0.94); }
+}
+
+/* ---- Aqua radial section glow ---- */
+.glow-aqua {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, rgba(6, 182, 212, 0.22), transparent 65%);
+  z-index: 0;
+}
+html:not(.dark) .glow-aqua {
+  background: radial-gradient(ellipse at center, rgba(6, 182, 212, 0.18), transparent 65%);
 }
 
 /* ---- Cursor-following spotlight (mouse interaction) ---- */
@@ -212,15 +249,8 @@ section[id] {
   opacity: 0;
   transition: opacity 0.4s ease;
   background: radial-gradient(
-    260px circle at var(--spot-x, 50%) var(--spot-y, 50%),
-    rgba(231, 111, 81, 0.12),
-    transparent 62%
-  );
-}
-.dark .spotlight-card::after {
-  background: radial-gradient(
     280px circle at var(--spot-x, 50%) var(--spot-y, 50%),
-    rgba(124, 58, 237, 0.18),
+    rgba(6, 182, 212, 0.22),
     transparent 62%
   );
 }
@@ -232,32 +262,108 @@ section[id] {
 .cursor-glow {
   background: radial-gradient(
     circle,
-    rgba(231, 111, 81, 0.13),
-    rgba(231, 111, 81, 0.04) 40%,
+    rgba(6, 182, 212, 0.18),
+    rgba(6, 182, 212, 0.05) 40%,
     transparent 65%
   );
-  mix-blend-mode: normal;
+  mix-blend-mode: screen;
 }
-.dark .cursor-glow {
-  background: radial-gradient(
-    circle,
-    rgba(124, 58, 237, 0.16),
-    rgba(124, 58, 237, 0.05) 40%,
-    transparent 65%
+
+/* ---- Aura.build signature assets ---- */
+
+/* Spinning conic border glow (Aura "Spinning Border Glow CTA") */
+@property --aura-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+@keyframes aura-angle-spin {
+  to { --aura-angle: 360deg; }
+}
+.aura-spin-border {
+  position: relative;
+  /* Fallback angle so browsers without @property still render a static ring */
+  --aura-angle: 0deg;
+}
+.aura-spin-border::before {
+  content: "";
+  position: absolute;
+  inset: -1.5px;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: conic-gradient(
+    from var(--aura-angle),
+    transparent 0%,
+    rgba(34, 211, 238, 0.9) 8%,
+    rgba(165, 243, 252, 0.9) 14%,
+    transparent 30%
   );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: aura-angle-spin 3.5s linear infinite;
+  pointer-events: none;
+}
+
+/* Animated multi-color gradient hairline (Aura "Gradient Border Overlay") */
+@keyframes aura-slide {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+.aura-hairline {
+  position: relative;
+}
+.aura-hairline::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    100deg,
+    rgba(6, 182, 212, 0.5),
+    rgba(165, 243, 252, 0.12) 30%,
+    rgba(34, 211, 238, 0.6) 50%,
+    rgba(165, 243, 252, 0.1) 70%,
+    rgba(6, 182, 212, 0.5)
+  );
+  background-size: 200% 100%;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: aura-slide 6s linear infinite;
+  pointer-events: none;
+}
+
+/* Animated gradient beam sweep (Aura "Animated Gradient Beam CTA") */
+@keyframes beam-sweep {
+  0% { transform: translateX(-160%) skewX(-18deg); }
+  55%, 100% { transform: translateX(260%) skewX(-18deg); }
+}
+.beam {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 38%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.38), transparent);
+  transform: translateX(-160%) skewX(-18deg);
+  animation: beam-sweep 3s ease-in-out infinite;
+  pointer-events: none;
+  will-change: transform;
 }
 
 /* ---- Brand flavor ---- */
 ::selection {
-  background: rgba(231, 111, 81, 0.28);
+  background: rgba(6, 182, 212, 0.32);
+  color: var(--color-slate-950);
 }
 
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #d4d4d8; border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: #a1a1aa; }
-.dark ::-webkit-scrollbar-thumb { background: #3f3f46; }
-.dark ::-webkit-scrollbar-thumb:hover { background: #52525b; }
+::-webkit-scrollbar-thumb { background: #0891b2; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #06b6d4; }
+html:not(.dark) ::-webkit-scrollbar-thumb { background: #d4d4d8; }
+html:not(.dark) ::-webkit-scrollbar-thumb:hover { background: #a1a1aa; }
 
 @media (prefers-reduced-motion: reduce) {
   .reveal-up, .reveal-left, .reveal-right {
@@ -271,6 +377,7 @@ section[id] {
   .cursor-glow { display: none !important; }
   .spotlight-card::after { display: none; }
   .term-caret, .dot-ping { animation: none; }
+  .aura-spin-border::before, .aura-hairline::before, .beam { animation: none; }
 }
 
 /* Terminal accents (Claude Code style) */

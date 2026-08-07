@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Eye } from 'lucide-react'
 
-const API = 'https://shimul-ai.shimulraj0.workers.dev'
+// In dev, hit the relative path so Vite's proxy forwards it same-origin (no CORS).
+// In production, call the worker directly (it allows the portfolio origins).
+const API = import.meta.env.DEV ? '' : 'https://shimul-ai.shimulraj0.workers.dev'
 
 function VisitorCount() {
   const [count, setCount] = useState(null)

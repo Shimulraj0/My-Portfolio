@@ -1,11 +1,13 @@
-import { lazy, Suspense, useEffect, useRef } from 'react'
-import { motion, useMotionValue, useSpring } from 'framer-motion'
+import { lazy, Suspense, useEffect, useRef, useState } from 'react'
+import { MotionConfig, motion, useMotionValue, useSpring } from 'framer-motion'
 import Lenis from 'lenis'
 import Navbar from './components/Navbar.jsx'
 import Hero from './components/Hero.jsx'
-import AuroraBackground from './components/AuroraBackground.jsx'
+import GoldDust from './components/GoldDust.jsx'
 import CursorGlow from './components/CursorGlow.jsx'
 import Marquee from './components/Marquee.jsx'
+import IntroPreloader from './components/IntroPreloader.jsx'
+import BackToTop from './components/BackToTop.jsx'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -13,6 +15,7 @@ gsap.registerPlugin(ScrollTrigger)
 
 const About = lazy(() => import('./components/About.jsx'))
 const Skills = lazy(() => import('./components/Skills.jsx'))
+const Experience = lazy(() => import('./components/Experience.jsx'))
 const Projects = lazy(() => import('./components/Projects.jsx'))
 const Contact = lazy(() => import('./components/Contact.jsx'))
 const Footer = lazy(() => import('./components/Footer.jsx'))
@@ -97,29 +100,39 @@ function ScrollProgress() {
     <motion.div
       aria-hidden
       style={{ scaleX }}
-      className="fixed inset-x-0 top-0 z-[60] h-[3px] origin-left bg-gradient-to-r from-terracotta-500 via-accent to-teal"
+      className="fixed inset-x-0 top-0 z-[60] h-[3px] origin-left bg-gradient-to-r from-aqua-500 via-aqua-300 to-aqua-600"
     />
   )
 }
 
 function App() {
+  const [ready, setReady] = useState(false)
+
   return (
-    <div className="relative min-h-screen bg-cream text-navy transition-colors duration-300 dark:bg-zinc-950 dark:text-zinc-100">
-      <AuroraBackground />
+    // reducedMotion="user": skip transform/layout animations for users who
+    // prefer reduced motion (covers the preloader curtain + hero entrance).
+    <MotionConfig reducedMotion="user">
+    <div className="relative min-h-screen bg-cream text-slate-900 transition-colors duration-300 dark:bg-zinc-950 dark:text-zinc-100">
+      <IntroPreloader onDone={() => setReady(true)} />
+      <GoldDust />
       <ScrollReveal />
       <SmoothScroll />
       <ScrollProgress />
       <CursorGlow />
+      <BackToTop />
       <div className="relative z-10">
       <Navbar />
       <main>
-        <Hero />
+        <Hero ready={ready} />
         <Marquee />
         <Suspense fallback={null}>
           <About />
         </Suspense>
         <Suspense fallback={null}>
           <Skills />
+        </Suspense>
+        <Suspense fallback={null}>
+          <Experience />
         </Suspense>
         <Suspense fallback={null}>
           <Projects />
@@ -136,6 +149,7 @@ function App() {
       </Suspense>
       </div>
     </div>
+    </MotionConfig>
   )
 }
 

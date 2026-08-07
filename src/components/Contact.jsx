@@ -4,6 +4,8 @@ import { Mail, Phone, MapPin, Send, CheckCircle2, MessageSquareText, FileText } 
 import { profile, socials } from '../data.js'
 import { GithubIcon, InstagramIcon, LinkedinIcon } from './BrandIcons.jsx'
 import { openGmailCompose } from '../gmail.js'
+import VeilRays from './effects/VeilRays.jsx'
+import FluidBackground from './effects/FluidBackground.jsx'
 
 const DIRECT = [
   { label: 'Email', value: profile.email, href: `mailto:${profile.email}`, icon: Mail },
@@ -28,7 +30,7 @@ const hoverMap = {
 }
 
 const inputClass =
-  'w-full rounded-xl border border-white/15 bg-white/10 px-4 py-2.5 text-sm text-white placeholder:text-cream/40 outline-none backdrop-blur transition-colors focus:border-terracotta-300 focus:bg-white/15'
+  'w-full rounded-xl border border-white/15 bg-white/10 px-4 py-2.5 text-sm text-white placeholder:text-cream/40 outline-none backdrop-blur transition-colors focus:border-aqua-300 focus:bg-white/15'
 
 function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '' })
@@ -66,8 +68,11 @@ function Contact() {
   return (
     <section
       id="contact"
-      className="relative overflow-hidden bg-gradient-to-br from-navy via-teal to-navy py-24"
+      className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-950 py-24"
     >
+      <VeilRays />
+      {/* WebGL fluid background (adapted from WebGL-Fluid-Simulation, MIT) */}
+      <FluidBackground variant="contact" />
       <div
         aria-hidden
         className="pointer-events-none absolute -right-24 -top-24 h-96 w-96 rounded-full bg-white/10 blur-3xl"
@@ -80,7 +85,7 @@ function Contact() {
       {/* Animated accent orbs */}
       <motion.div
         aria-hidden
-        className="pointer-events-none absolute top-1/2 left-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/10 blur-3xl"
+        className="pointer-events-none absolute top-1/2 left-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-aqua-500/15 blur-3xl"
         animate={{
           scale: [1, 1.2, 1],
           opacity: [0.3, 0.6, 0.3],
@@ -96,7 +101,7 @@ function Contact() {
           transition={{ duration: 0.6, ease: 'easeOut' }}
           className="mb-14 text-center"
         >
-          <p className="font-mono text-sm font-semibold uppercase tracking-widest text-terracotta-300">
+          <p className="font-mono text-sm font-semibold uppercase tracking-widest text-aqua-300">
             Contact
           </p>
           <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-cream sm:text-4xl">
@@ -122,11 +127,11 @@ function Contact() {
                 const Icon = row.icon
                 const body = (
                   <div className="flex items-center gap-4">
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-white/10 text-terracotta-200">
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-white/10 text-aqua-200">
                       <Icon size={18} />
                     </div>
                     <div className="min-w-0">
-                      <p className="text-xs font-medium text-terracotta-200/80">{row.label}</p>
+                      <p className="text-xs font-medium text-aqua-200/80">{row.label}</p>
                       <p className="truncate text-cream">{row.value}</p>
                     </div>
                   </div>
@@ -175,7 +180,7 @@ function Contact() {
             className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-md sm:p-8"
           >
             <div className="mb-5 flex items-center gap-2">
-              <MessageSquareText size={18} className="text-terracotta-300" />
+              <MessageSquareText size={18} className="text-aqua-300" />
               <h3 className="text-lg font-bold text-white">Send a Message</h3>
             </div>
 
@@ -191,14 +196,14 @@ function Contact() {
                 <p className="text-lg font-bold text-white">Gmail is opening!</p>
                 <p className="max-w-xs text-sm text-cream/70">
                   Your message is pre-filled — just hit send. If nothing opened, email me directly at{' '}
-                  <a href={`mailto:${profile.email}`} className="font-semibold text-terracotta-300 underline">
+                  <a href={`mailto:${profile.email}`} className="font-semibold text-aqua-300 underline">
                     {profile.email}
                   </a>.
                 </p>
                 <button
                   type="button"
                   onClick={() => setSent(false)}
-                  className="mt-2 rounded-full border border-white/20 px-4 py-1.5 text-xs font-semibold text-cream/80 transition-colors hover:border-terracotta-300 hover:text-white"
+                  className="mt-2 rounded-full border border-white/20 px-4 py-1.5 text-xs font-semibold text-cream/80 transition-colors hover:border-aqua-300 hover:text-white"
                 >
                   Write another message
                 </button>
@@ -259,7 +264,7 @@ function Contact() {
                   type="submit"
                   whileTap={{ scale: 0.97 }}
                   whileHover={{ scale: 1.02 }}
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-terracotta-600 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-terracotta-600/30 transition-colors hover:bg-terracotta-700"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-aqua-600 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-aqua-600/30 transition-colors hover:bg-aqua-700"
                 >
                   <Send size={16} />
                   Send via Gmail
