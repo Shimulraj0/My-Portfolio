@@ -1,0 +1,89 @@
+name: Deploy to GitHub Pages
+
+# Automates what deploy.ps1 did by hand: on every push to the source repo,
+# build the Vite app and publish the dist/ output into the live site repo
+# (Shimulraj0/Shimulraj0.github.io), which serves https://shimul.is-a.dev
+# and https://shimulraj0.github.io.
+#
+# Requires a repo secret named GH_PAGES_PAT: a GitHub token with "Contents:
+# Read and write" access to Shimulraj0/Shimulraj0.github.io only.
+#   Settings → Secrets and variables → Actions → New repository secret.
+
+on:
+  push:
+    branches: [master, main]
+  workflow_dispatch: # allow manual deploys from the Actions tab
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-to-pages
+  cancel-in-progress: false # never interrupt a deploy mid-push to the live repo
+
+jobs:
+  build-and-deploy:
+    name: Build & deploy to shimulraj0.github.io
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Check deployment secret
+        shell: bash
+        run: |
+          if [ -z "${{ secrets.GH_PAGES_PAT }}" ]; then
+            echo "::error::Missing 'GH_PAGES_PAT' secret. Create a token with Contents: Read & Write on Shimulraj0/Shimulraj0.github.io, then add it at Settings → Secrets and variables → Actions, and re-run this workflow."
+            exit 1
+          fi
+
+      - name: Clone live site repo
+        uses: actions/checkout@v4
+        with:
+          repository: Shimulraj0/Shimulraj0.github.io
+          token: ${{ secrets.GH_PAGES_PAT }}
+          path: live-site
+
+      - name: Sync dist into live site and push
+        shell: bash
+        run: |
+          cd live-site
+          git config user.name "shimulraj0"
+          git config user.email "shimulrajdas001@gmail.com"
+
+          # Clear everything except .git (mirrors deploy.ps1 behavior)
+          find . -mindepth 1 -maxdepth 1 ! -name '.git' -exec rm -rf {} +
+          cp -r ../dist/. .
+
+          # GitHub Pages + custom domain
+          touch .nojekyll
+          echo "shimul.is-a.dev" > CNAME
+
+          printf '%s\n' \
+            '# Shimul Raj Das — Portfolio' \
+            '' \
+            'Live at https://shimul.is-a.dev' \
+            '' \
+            'Deployed automatically by GitHub Actions from Shimulraj0/My-Portfolio.' \
+            'Push to master/main → build → publish.' > README.md
+
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to deploy — live site already up to date."
+          else
+            git commit -m "Deploy portfolio (build ${GITHUB_SHA:0:7})"
+            git push origin main
+            echo "Deployed — live in ~1-2 min at https://shimul.is-a.dev"
+          fi
